@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Currículo Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <div class="max-w-4xl mx-auto my-10 bg-white shadow-lg rounded-lg overflow-hidden">
+        <header class="bg-blue-600 text-white p-8 text-center" id="header-info">
+            <h1 class="text-4xl font-bold uppercase tracking-wide">Carregando Nome...</h1>
+            <p class="text-xl opacity-90">Carregando Cargo...</p>
+        </header>
+
+        <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-6">
+                <section>
+                    <h2 class="text-blue-600 font-bold border-b-2 border-blue-100 mb-2">CONTATO</h2>
+                    <div id="contato-list" class="text-sm space-y-1"></div>
+                </section>
+                
+                <section>
+                    <h2 class="text-blue-600 font-bold border-b-2 border-blue-100 mb-2">IDIOMAS</h2>
+                    <ul id="idiomas-list" class="list-disc ml-4 text-sm"></ul>
+                </section>
+            </div>
+
+            <div class="md:col-span-2 space-y-8">
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-700 mb-4 border-l-4 border-blue-600 pl-2">Experiência Profissional</h2>
+                    <div id="exp-container" class="space-y-4"></div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-700 mb-4 border-l-4 border-blue-600 pl-2">Formação Acadêmica</h2>
+                    <div id="edu-container" class="space-y-2"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Aqui conectaremos a sua URL do Google Sheets (convertida para JSON ou CSV)
+        const SHEET_URL = 'SUA_URL_AQUI';
+
+        async function carregarDados() {
+            // Lógica para buscar os dados e preencher o HTML
+            console.log("Buscando dados da planilha...");
+            // Exemplo de preenchimento manual para teste inicial:
+            document.getElementById('header-info').innerHTML = `
+                <h1 class="text-4xl font-bold uppercase">Seu Nome Aqui</h1>
+                <p class="text-xl opacity-90">Seu Cargo / Especialidade</p>
+            `;
+        }
+
+        carregarDados();
+    </script>
+</body>
+</html>

@@ -3,150 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currículo Interativo - Matheus</title>
+    <title>Matheus Maia | Arquiteto de Soluções Low-Code</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .loading { border-top-color: #3498db; animation: spinner 1.5s linear infinite; }
-        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @media print { .no-print { display: none; } }
     </style>
 </head>
-<body class="bg-slate-50 text-gray-800">
+<body class="bg-gray-50 text-gray-900 p-4 md:p-10">
 
-    <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
-        <div class="loading ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
-    </div>
-
-    <main class="max-w-5xl mx-auto my-10 bg-white shadow-2xl rounded-xl overflow-hidden hidden" id="main-content">
-        <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-10 text-center">
-            <h1 id="nome" class="text-5xl font-extrabold tracking-tight mb-2">Matheus</h1>
-            <p id="cargo" class="text-2xl font-light opacity-90 mb-4 uppercase tracking-widest"></p>
-            <div id="contato-header" class="flex flex-wrap justify-center gap-4 text-sm opacity-80"></div>
+    <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <header class="border-b pb-6 mb-6">
+            <h1 class="text-4xl font-bold">Matheus Maia</h1>
+            <p class="text-xl text-blue-600 font-semibold mt-2">Financeiro | Arquiteto de Soluções Low-Code | Analista de Dados</p>
+            <div class="mt-4 text-sm text-gray-600 flex flex-wrap gap-4">
+                <span>📍 Fortaleza, Ceará</span>
+                <span>📧 matheusmaia03@gmail.com</span>
+                <span>🔗 <a href="https://www.linkedin.com/in/matheus-maia" class="underline">LinkedIn</a></span>
+            </div>
+            <button onclick="window.print()" class="no-print mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+                Baixar Currículo (PDF)
+            </button>
         </header>
 
-        <div class="p-10 grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div class="space-y-10">
-                <section>
-                    <h3 class="text-indigo-700 font-bold text-lg border-b-2 border-indigo-100 mb-4 pb-1 uppercase">Sobre Mim</h3>
-                    <p id="bio" class="text-gray-600 leading-relaxed italic"></p>
-                </section>
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-3">Resumo</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Mais de 6 anos de experiência em gestão de projetos e processos, utilizando a análise de dados como espinha dorsal da tomada de decisão. Especialista em automação de processos, integração de Google Sheets, JavaScript e Firebase. Focado em transformar informações em estratégias de crescimento.
+            </p>
+        </section>
 
-                <section>
-                    <h3 class="text-indigo-700 font-bold text-lg border-b-2 border-indigo-100 mb-4 pb-1 uppercase">Idiomas</h3>
-                    <ul id="lista-idiomas" class="space-y-2"></ul>
-                </section>
-
-                <section>
-                    <h3 class="text-indigo-700 font-bold text-lg border-b-2 border-indigo-100 mb-4 pb-1 uppercase">Cursos Extras</h3>
-                    <div id="lista-cursos" class="space-y-3"></div>
-                </section>
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Experiência Profissional</h2>
+            <div class="mb-4">
+                <h3 class="font-bold">Assessor Técnico Administrativo-Financeiro | AMC</h3>
+                <p class="text-sm text-gray-500 italic">2022 - Presente</p>
+                <ul class="list-disc ml-5 mt-2 text-gray-700">
+                    <li>Gerenciamento de investimentos e controle financeiro via sistemas próprios.</li>
+                    <li>Desenvolvimento de subsistemas de alta relevância para eficiência operacional.</li>
+                    <li>Acompanhamento de processos licitatórios e análise de contratos.</li>
+                </ul>
             </div>
+        </section>
 
-            <div class="lg:col-span-2 space-y-12">
-                <section>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span class="bg-indigo-600 w-2 h-8 mr-4 rounded-full"></span>Experiência Profissional
-                    </h2>
-                    <div id="lista-exp" class="space-y-8"></div>
-                </section>
-
-                <section>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span class="bg-indigo-600 w-2 h-8 mr-4 rounded-full"></span>Formação Acadêmica
-                    </h2>
-                    <div id="lista-edu" class="space-y-4"></div>
-                </section>
+        <section>
+            <h2 class="text-2xl font-bold mb-3">Competências Técnicas</h2>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-gray-200 px-3 py-1 rounded">Low-Code (Google Apps Script, Firebase)</span>
+                <span class="bg-gray-200 px-3 py-1 rounded">Análise de Dados</span>
+                <span class="bg-gray-200 px-3 py-1 rounded">Gestão Financeira</span>
+                <span class="bg-gray-200 px-3 py-1 rounded">Automação de Processos</span>
             </div>
-        </div>
-    </main>
+        </section>
+    </div>
 
-    <script>
-        // INSTRUÇÃO: Publique cada aba como CSV no Google Sheets e cole os links abaixo:
-        // Arquivo > Compartilhar > Publicar na Web > Escolha a Aba > Valores sep. por vírgula (.csv)
-        const LINKS = {
-            dados: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG-h9KLwN9h493rGpwt1FLz6grOZEiInMORwjA1GoJ3h9CyTiPMFdx1xgxH6Xg2wcOUpp2tUFSQUrI/pub?gid=0&single=true&output=csv',
-            exp: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG-h9KLwN9h493rGpwt1FLz6grOZEiInMORwjA1GoJ3h9CyTiPMFdx1xgxH6Xg2wcOUpp2tUFSQUrI/pub?gid=1798311186&single=true&output=csv',
-            edu: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG-h9KLwN9h493rGpwt1FLz6grOZEiInMORwjA1GoJ3h9CyTiPMFdx1xgxH6Xg2wcOUpp2tUFSQUrI/pub?gid=1367742086&single=true&output=csv',
-            cursos: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG-h9KLwN9h493rGpwt1FLz6grOZEiInMORwjA1GoJ3h9CyTiPMFdx1xgxH6Xg2wcOUpp2tUFSQUrI/pub?gid=1422012584&single=true&output=csv',
-            idiomas: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG-h9KLwN9h493rGpwt1FLz6grOZEiInMORwjA1GoJ3h9CyTiPMFdx1xgxH6Xg2wcOUpp2tUFSQUrI/pub?gid=1301544454&single=true&output=csv'
-        };
-
-        async function fetchCSV(url) {
-            const response = await fetch(url);
-            const text = await response.text();
-            return text.split('\n').map(row => row.split(',').map(cell => cell.trim().replace(/^"|"$/g, '')));
-        }
-
-        async function init() {
-            try {
-                const [dados, exp, edu, cursos, idiomas] = await Promise.all([
-                    fetchCSV(LINKS.dados), fetchCSV(LINKS.exp), fetchCSV(LINKS.edu), fetchCSV(LINKS.cursos), fetchCSV(LINKS.idiomas)
-                ]);
-
-                // Preencher Dados Pessoais (Linha 1 é cabeçalho, Linha 2 é conteúdo: index [1])
-                const d = dados[1];
-                document.getElementById('nome').innerText = d[0];
-                document.getElementById('cargo').innerText = d[1];
-                document.getElementById('bio').innerText = d[6];
-                document.getElementById('contato-header').innerHTML = `
-                    <span>📍 ${d[5]}</span> | <span>✉️ ${d[2]}</span> | <span>🔗 ${d[4]}</span>
-                `;
-
-                // Experiência
-                const expContainer = document.getElementById('lista-exp');
-                exp.slice(1).forEach(row => {
-                    if(!row[0]) return;
-                    expContainer.innerHTML += `
-                        <div class="relative pl-6 border-l-2 border-gray-100">
-                            <div class="absolute w-3 h-3 bg-indigo-500 rounded-full -left-[7px] mt-2"></div>
-                            <h4 class="text-xl font-bold text-gray-800">${row[1]}</h4>
-                            <div class="text-indigo-600 font-medium">${row[0]} | <span class="text-gray-400 text-sm">${row[2]}</span></div>
-                            <p class="mt-2 text-gray-600">${row[3]}</p>
-                        </div>
-                    `;
-                });
-
-                // Formação
-                const eduContainer = document.getElementById('lista-edu');
-                edu.slice(1).forEach(row => {
-                    if(!row[0]) return;
-                    eduContainer.innerHTML += `
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-700">${row[1]}</h4>
-                            <p class="text-gray-600">${row[0]} — ${row[2]}</p>
-                        </div>
-                    `;
-                });
-
-                // Idiomas
-                const idiomasContainer = document.getElementById('lista-idiomas');
-                idiomas.slice(1).forEach(row => {
-                    if(!row[0]) return;
-                    idiomasContainer.innerHTML += `<li class="flex justify-between text-sm"><strong>${row[0]}</strong> <span class="text-gray-500">${row[1]}</span></li>`;
-                });
-
-                // Cursos
-                const cursosContainer = document.getElementById('lista-cursos');
-                cursos.slice(1).forEach(row => {
-                    if(!row[0]) return;
-                    cursosContainer.innerHTML += `
-                        <div class="text-xs border-l-2 border-blue-200 pl-2">
-                            <p class="font-semibold text-gray-700">${row[0]}</p>
-                            <p class="text-gray-500">${row[1]} (${row[2]})</p>
-                        </div>
-                    `;
-                });
-
-                // Mostrar conteúdo
-                document.getElementById('loader').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-
-            } catch (e) {
-                console.error("Erro ao carregar:", e);
-                alert("Erro ao carregar dados. Verifique os links CSV no código.");
-            }
-        }
-
-        init();
-    </script>
 </body>
 </html>

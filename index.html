@@ -7,14 +7,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @media print { .no-print, .hidden-extra { display: block !important; } .print-hide { display: none; } }
+        [data-lang="en"] { display: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 p-4 md:p-10">
 
     <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <div class="no-print flex justify-end gap-2 mb-4">
+            <button onclick="setLang('pt')" class="text-2xl hover:scale-110 transition" title="Português">🇧🇷</button>
+            <button onclick="setLang('en')" class="text-2xl hover:scale-110 transition" title="English">🇺🇸</button>
+        </div>
+
         <header class="border-b pb-6 mb-6">
             <h1 class="text-4xl font-bold">Matheus Maia</h1>
-            <p class="text-xl text-blue-600 font-semibold mt-2">Financeiro | Arquiteto de Soluções Low-Code | Analista de Dados</p>
+            <p class="text-xl text-blue-600 font-semibold mt-2">
+                <span data-lang="pt">Financeiro | Arquiteto de Soluções Low-Code | Analista de Dados</span>
+                <span data-lang="en">Finance | Low-Code Solutions Architect | Data Analyst</span>
+            </p>
             <div class="mt-4 text-sm text-gray-600 flex flex-wrap gap-4">
                 <span>📍 Fortaleza, Ceará</span>
                 <span>📧 matheusmaia03@gmail.com</span>
@@ -22,35 +31,45 @@
                 <span>💻 <a href="https://github.com/Pivetzen" class="underline">Github: Pivetzen</a></span>
             </div>
             <button onclick="window.print()" class="no-print mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-                Baixar Currículo (PDF)
+                <span data-lang="pt">Baixar Currículo (PDF)</span>
+                <span data-lang="en">Download Resume (PDF)</span>
             </button>
         </header>
 
         <section class="mb-8">
-            <h2 class="text-2xl font-bold mb-3">Resumo</h2>
+            <h2 class="text-2xl font-bold mb-3">
+                <span data-lang="pt">Resumo</span>
+                <span data-lang="en">Summary</span>
+            </h2>
             <p class="text-gray-700 leading-relaxed text-justify">
-                Minha carreira é dedicada a transformar informações em ações estratégicas.Com mais de 6 anos de experiência em gestão de projetos e processos, meu diferencial é utilizar a análise de dados como a espinha dorsal da tomada de decisão. Não apenas gerencio tarefas; lidero com base em evidências, otimizando fluxos de trabalho. Minha jornada, da gestão financeira e licitatória na administração pública ao desenvolvimento de aplicações low-code (Google Sheets, JavaScript, Firebase), me proporcionou uma visão única entre a gestão de negócios e a agilidade técnica.Já desenvolvi sistemas de alta relevância, desde automações financeiras até aplicações interativas que resolvem problemas reais. Busco conexão com organizações que valorizam a inteligência de dados para inovação e crescimento.
-
+                <span data-lang="pt">Minha carreira é dedicada a transformar informações em ações estratégicas. Com mais de 6 anos de experiência em gestão de projetos e processos, meu diferencial é utilizar a análise de dados como a espinha dorsal da tomada de decisão. Não apenas gerencio tarefas; lidero com base em evidências, otimizando fluxos de trabalho. Minha jornada, da gestão financeira e licitatória na administração pública ao desenvolvimento de aplicações low-code (Google Sheets, JavaScript, Firebase), me proporcionou uma visão única entre a gestão de negócios e a agilidade técnica. Já desenvolvi sistemas de alta relevância, desde automações financeiras até aplicações interativas que resolvem problemas reais. Busco conexão com organizações que valorizam a inteligência de dados para inovação e crescimento.</span>
+                <span data-lang="en">My career is dedicated to transforming information into strategic actions. With over 6 years of experience in project and process management, my differential is using data analysis as the backbone for decision-making. I don't just manage tasks; I lead based on evidence, optimizing workflows. My journey, from financial and bidding management in public administration to developing low-code applications (Google Sheets, JavaScript, Firebase), has given me a unique vision between business management and technical agility. I have developed high-relevance systems, from financial automations to interactive applications that solve real problems. I am looking for connections with organizations that value data intelligence for innovation and growth.</span>
             </p>
         </section>
 
         <section class="mb-8">
-            <h2 class="text-2xl font-bold mb-3">Idiomas</h2>
+            <h2 class="text-2xl font-bold mb-3">
+                <span data-lang="pt">Idiomas</span>
+                <span data-lang="en">Languages</span>
+            </h2>
             <div class="flex flex-wrap gap-4">
                 <div class="bg-gray-100 px-4 py-2 rounded">
-                    <span class="font-bold">Português:</span> <span class="text-gray-700">Nativo</span>
+                    <span class="font-bold"><span data-lang="pt">Português:</span><span data-lang="en">Portuguese:</span></span> <span class="text-gray-700"><span data-lang="pt">Nativo</span><span data-lang="en">Native</span></span>
                 </div>
                 <div class="bg-gray-100 px-4 py-2 rounded">
-                    <span class="font-bold">Inglês:</span> <span class="text-gray-700">Profissional Completo</span>
+                    <span class="font-bold"><span data-lang="pt">Inglês:</span><span data-lang="en">English:</span></span> <span class="text-gray-700"><span data-lang="pt">Profissional Completo</span><span data-lang="en">Full Professional</span></span>
                 </div>
                 <div class="bg-gray-100 px-4 py-2 rounded">
-                    <span class="font-bold">Francês:</span> <span class="text-gray-700">Intermediário</span>
+                    <span class="font-bold"><span data-lang="pt">Francês:</span><span data-lang="en">French:</span></span> <span class="text-gray-700"><span data-lang="pt">Intermediário</span><span data-lang="en">Intermediate</span></span>
                 </div>
             </div>
         </section>
         
         <section class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Projetos de Destaque</h2>
+            <h2 class="text-2xl font-bold mb-4">
+                <span data-lang="pt">Projetos de Destaque</span>
+                <span data-lang="en">Featured Projects</span>
+            </h2>
             <div id="projetos-grid" class="grid md:grid-cols-2 gap-4">
                 <a href="https://pivetzen.github.io/Blushops/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">Blushops</h3><p class="text-xs text-gray-600 mt-1">E-commerce com foco em UX.</p></a>
                 <a href="https://pivetzen.github.io/desabafo-express/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">Desabafo Express</h3><p class="text-xs text-gray-600 mt-1">Bem-estar e organização mental.</p></a>
@@ -63,15 +82,21 @@
                     <a href="https://pivetzen.github.io/assistente-de-oracoes/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">Assistente de Orações</h3><p class="text-xs text-gray-600 mt-1">Apoio espiritual.</p></a>
                 </div>
             </div>
-            <button onclick="toggleSection('projetos-grid', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">Ver mais projetos</button>
+            <button onclick="toggleSection('projetos-grid', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+                <span data-lang="pt">Ver mais projetos</span>
+                <span data-lang="en">See more projects</span>
+            </button>
         </section>
 
         <section class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Experiência Profissional</h2>
+            <h2 class="text-2xl font-bold mb-4">
+                <span data-lang="pt">Experiência Profissional</span>
+                <span data-lang="en">Professional Experience</span>
+            </h2>
             <div id="exp-list" class="space-y-4">
                 <div class="border rounded p-4">
                     <h3 class="font-bold">Assessor Administrativo-Financeiro | AMC</h3>
-                    <p class="text-sm text-gray-600">(Atual)</p>
+                    <p class="text-sm text-gray-600">(<span data-lang="pt">Atual</span><span data-lang="en">Current</span>)</p>
                     <p class="text-sm text-gray-600">Gestão de contratos, processos licitatórios e automação de monitoramento interno.</p>
                 </div>
                 <div class="hidden-extra hidden space-y-4">
@@ -93,11 +118,17 @@
                     </div>
                 </div>
             </div>
-            <button onclick="toggleSection('exp-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">Ver mais experiências</button>
+            <button onclick="toggleSection('exp-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+                <span data-lang="pt">Ver mais experiências</span>
+                <span data-lang="en">See more experience</span>
+            </button>
         </section>
 
         <section>
-            <h2 class="text-2xl font-bold mb-3">Competências Técnicas</h2>
+            <h2 class="text-2xl font-bold mb-3">
+                <span data-lang="pt">Competências Técnicas</span>
+                <span data-lang="en">Technical Skills</span>
+            </h2>
             <div class="flex flex-wrap gap-2">
                 <span class="bg-gray-200 px-3 py-1 rounded">JavaScript</span>
                 <span class="bg-gray-200 px-3 py-1 rounded">HTML</span>
@@ -114,11 +145,23 @@
     </div>
 
     <script>
+        function setLang(lang) {
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.style.display = (el.getAttribute('data-lang') === lang) ? (el.tagName === 'SPAN' ? 'inline' : 'block') : 'none';
+            });
+        }
         function toggleSection(id, btn) {
             const container = document.getElementById(id);
             const hiddenElements = container.querySelectorAll('.hidden-extra');
             hiddenElements.forEach(el => el.classList.toggle('hidden'));
-            btn.innerText = btn.innerText === 'Ver mais projetos' || btn.innerText === 'Ver mais experiências' ? 'Ver menos' : (id === 'projetos-grid' ? 'Ver mais projetos' : 'Ver mais experiências');
+            const isPt = document.querySelector('[data-lang="pt"]').style.display !== 'none';
+            if (id === 'projetos-grid') {
+                btn.innerHTML = btn.innerText.includes('Ver') || btn.innerText.includes('See') ? 
+                    (isPt ? 'Ver menos' : 'See less') : (isPt ? 'Ver mais projetos' : 'See more projects');
+            } else {
+                btn.innerHTML = btn.innerText.includes('Ver') || btn.innerText.includes('See') ? 
+                    (isPt ? 'Ver menos' : 'See less') : (isPt ? 'Ver mais experiências' : 'See more experience');
+            }
         }
     </script>
 </body>

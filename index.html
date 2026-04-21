@@ -6,7 +6,7 @@
     <title>Matheus Maia | Arquiteto de Soluções Low-Code</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @media print { .no-print { display: none; } }
+        @media print { .no-print, .hidden-print { display: none !important; } .print-show { display: block !important; } }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 p-4 md:p-10">
@@ -35,65 +35,56 @@
 
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">Projetos de Destaque</h2>
-            <div class="grid md:grid-cols-2 gap-4">
+            <div id="projetos-grid" class="grid md:grid-cols-2 gap-4">
                 <a href="https://pivetzen.github.io/Blushops/" class="border rounded p-4 hover:bg-blue-50 transition block">
                     <h3 class="font-bold text-lg text-blue-700">Blushops</h3>
-                    <p class="text-xs text-gray-600 mt-1">Plataforma de e-commerce focada em experiência de usuário e gestão de catálogo.</p>
+                    <p class="text-xs text-gray-600 mt-1">Plataforma de e-commerce focada em experiência de usuário.</p>
                 </a>
                 <a href="https://pivetzen.github.io/desabafo-express/" class="border rounded p-4 hover:bg-blue-50 transition block">
                     <h3 class="font-bold text-lg text-blue-700">Desabafo Express</h3>
-                    <p class="text-xs text-gray-600 mt-1">Ferramenta de bem-estar para registro e organização de pensamentos diários.</p>
+                    <p class="text-xs text-gray-600 mt-1">Ferramenta de bem-estar para registro de pensamentos.</p>
                 </a>
-                <a href="https://pivetzen.github.io/PetCare-Pro-Digital/" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">PetCare Pro Digital</h3>
-                    <p class="text-xs text-gray-600 mt-1">Sistema de gestão de saúde e rotina para pets, centralizando dados de cuidados.</p>
-                </a>
-                <a href="https://pivetzen.github.io/medtracker/" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">MedTracker</h3>
-                    <p class="text-xs text-gray-600 mt-1">Aplicação para monitoramento e controle de cronogramas de medicação.</p>
-                </a>
-                <a href="https://pivetzen.github.io/PedraPapelTesoura/" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">Pedra, Papel e Tesoura</h3>
-                    <p class="text-xs text-gray-600 mt-1">Versão interativa e gamificada do clássico, focada em lógica de programação.</p>
-                </a>
-                <a href="https://pivetzen.github.io/InsuliCalc/" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">InsuliCalc</h3>
-                    <p class="text-xs text-gray-600 mt-1">Calculadora especializada para auxílio no controle de dosagens glicêmicas.</p>
-                </a>
-                <a href="https://pivetzen.github.io/Petzildo/" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">Petzildo</h3>
-                    <p class="text-xs text-gray-600 mt-1">Plataforma dedicada à organização e bem-estar de animais de estimação.</p>
-                </a>
-                <a href="https://pivetzen.github.io/assistente-de-oracoes/" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">Assistente de Orações</h3>
-                    <p class="text-xs text-gray-600 mt-1">Aplicação de apoio espiritual com organização de pedidos e rotinas de oração.</p>
-                </a>
+                <div class="hidden-extra hidden contents">
+                    <a href="https://pivetzen.github.io/PetCare-Pro-Digital/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">PetCare Pro Digital</h3><p class="text-xs text-gray-600 mt-1">Gestão de saúde e rotina para pets.</p></a>
+                    <a href="https://pivetzen.github.io/medtracker/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">MedTracker</h3><p class="text-xs text-gray-600 mt-1">Monitoramento de medicações.</p></a>
+                    <a href="https://pivetzen.github.io/PedraPapelTesoura/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">Pedra, Papel e Tesoura</h3><p class="text-xs text-gray-600 mt-1">Versão gamificada para lógica.</p></a>
+                    <a href="https://pivetzen.github.io/InsuliCalc/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">InsuliCalc</h3><p class="text-xs text-gray-600 mt-1">Calculadora para controle glicêmico.</p></a>
+                    <a href="https://pivetzen.github.io/Petzildo/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">Petzildo</h3><p class="text-xs text-gray-600 mt-1">Bem-estar animal.</p></a>
+                    <a href="https://pivetzen.github.io/assistente-de-oracoes/" class="border rounded p-4 hover:bg-blue-50 transition block"><h3 class="font-bold text-lg text-blue-700">Assistente de Orações</h3><p class="text-xs text-gray-600 mt-1">Apoio espiritual e rotinas.</p></a>
+                </div>
             </div>
+            <button onclick="toggleSection('projetos-grid', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">Ver mais projetos</button>
         </section>
 
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">Experiência Profissional</h2>
-            <div class="mb-4">
-                <h3 class="font-bold">Assessor Técnico Administrativo-Financeiro | AMC</h3>
-                <p class="text-sm text-gray-500 italic">2022 - Presente</p>
-                <ul class="list-disc ml-5 mt-2 text-gray-700">
-                    <li>Desenvolvimento de subsistemas de alta relevância e controle financeiro automatizado.</li>
-                    <li>Tutor em capacitações de boas práticas para sistemas da Prefeitura de Fortaleza.</li>
-                </ul>
+            <div id="exp-list" class="space-y-4">
+                <div class="border rounded p-4">
+                    <h3 class="font-bold">Assessor Técnico Administrativo-Financeiro | AMC</h3>
+                    <p class="text-sm text-gray-500 italic">2022 - Presente</p>
+                </div>
+                <div class="hidden-extra hidden space-y-4">
+                    <div class="border rounded p-4">
+                        <h3 class="font-bold">Assistente de gestão | AMC</h3>
+                        <p class="text-sm text-gray-500 italic">2019 - 2022</p>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h3 class="font-bold">Consultor empresarial | Autônomo</h3>
+                        <p class="text-sm text-gray-500 italic">2018 - 2019</p>
+                    </div>
+                </div>
             </div>
-        </section>
-
-        <section>
-            <h2 class="text-2xl font-bold mb-3">Competências Técnicas</h2>
-            <div class="flex flex-wrap gap-2">
-                <span class="bg-gray-200 px-3 py-1 rounded">JavaScript</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Google Apps Script</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Firebase</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Análise de Dados</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Automação</span>
-            </div>
+            <button onclick="toggleSection('exp-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">Ver mais experiências</button>
         </section>
     </div>
 
+    <script>
+        function toggleSection(id, btn) {
+            const container = document.getElementById(id);
+            const hiddenElements = container.querySelectorAll('.hidden-extra');
+            hiddenElements.forEach(el => el.classList.toggle('hidden'));
+            btn.innerText = btn.innerText === 'Ver mais' ? 'Ver menos' : 'Ver mais';
+        }
+    </script>
 </body>
 </html>

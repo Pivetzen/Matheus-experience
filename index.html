@@ -214,12 +214,13 @@
                 <span data-lang="pt">Formação Acadêmica</span>
                 <span data-lang="en">Education</span>
             </h2>
-            <div class="space-y-3">
-                <div class="border-l-4 border-blue-600 pl-4 py-1">
-                    <h3 class="font-bold text-gray-800">
+            <div id="exp-list" class="space-y-4">
+                <div class="border rounded p-4">
+                    <h3 class="font-bold">
                         <span data-lang="pt">Especialização em IA para Desenvolvedores</span>
                         <span data-lang="en">Specialization in AI for Developers</span>
                     </h3>
+                    <p class="text-sm text-gray-600">(<span data-lang="pt">Atual</span><span data-lang="en">Current</span>)</p>
                     <p class="text-sm text-gray-600">
                         <span>Faculdade Pitágoras</span> | 
                         <span class="italic text-blue-600">
@@ -228,35 +229,41 @@
                         </span>
                     </p>
                 </div>
-                <div class="border-l-4 border-blue-600 pl-4 py-1">
-                    <h3 class="font-bold text-gray-800">
-                        <span data-lang="pt">Pós-Graduação em Engenharia de Software</span>
-                        <span data-lang="en">Postgraduate Degree in Software Engineering</span>
-                    </h3>
-                    <p class="text-sm text-gray-600">Faculdade Pitágoras</p>
-                </div>
-                <div class="border-l-4 border-blue-600 pl-4 py-1">
-                    <h3 class="font-bold text-gray-800">
-                        <span data-lang="pt">MBA em Logística Empresarial</span>
-                        <span data-lang="en">MBA in Business Logistics</span>
-                    </h3>
-                    <p class="text-sm text-gray-600">Universidade Estácio de Sá</p>
-                </div>
-                <div class="border-l-4 border-blue-600 pl-4 py-1">
-                    <h3 class="font-bold text-gray-800">
-                        <span data-lang="pt">Pós-Graduação em Gestão Financeira e Controladoria</span>
-                        <span data-lang="en">Postgraduate Degree in Financial Management and Control</span>
-                    </h3>
-                    <p class="text-sm text-gray-600">Universidade Estácio de Sá</p>
-                </div>
-                <div class="border-l-4 border-blue-600 pl-4 py-1">
-                    <h3 class="font-bold text-gray-800">
-                        <span data-lang="pt">Graduação em Administração de Empresas</span>
-                        <span data-lang="en">Bachelor's Degree in Business Administration</span>
-                    </h3>
-                    <p class="text-sm text-gray-600">UFC — Universidade Federal do Ceará</p>
+                <div class="hidden-extra hidden space-y-4">
+                    <div class="border rounded p-4">
+                        <h3 class="font-bold">
+                            <span data-lang="pt">Pós-Graduação em Engenharia de Software</span>
+                            <span data-lang="en">Postgraduate Degree in Software Engineering</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">Faculdade Pitágoras</p>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h3 class="font-bold">
+                            <span data-lang="pt">MBA em Logística Empresarial</span>
+                            <span data-lang="en">MBA in Business Logistics</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">Universidade Estácio de Sá</p>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h3 class="font-bold">
+                            <span data-lang="pt">Pós-Graduação em Gestão Financeira e Controladoria</span>
+                            <span data-lang="en">Postgraduate Degree in Financial Management and Control</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">Universidade Estácio de Sá</p>
+                    </div>
+                    <div class="border rounded p-4">
+                        <h3 class="font-bold">
+                            <span data-lang="pt">Graduação em Administração de Empresas</span>
+                            <span data-lang="en">Bachelor's Degree in Business Administration</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">UFC — Universidade Federal do Ceará</p>
+                    </div>
                 </div>
             </div>
+            <button onclick="toggleSection('exp-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+                <span data-lang="pt">Ver mais formações</span>
+                <span data-lang="en">See more education</span>
+            </button>
         </section>
 
         <section>

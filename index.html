@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @media print { .no-print, .hidden-extra { display: block !important; } .print-hide { display: none; } }
+        /* Garante o estado inicial em português ocultando o inglês */
         [data-lang="en"] { display: none; }
     </style>
 </head>
@@ -210,7 +211,7 @@
         </section>
 
         <section class="mb-8">
-            <h2 class="edu-list font-bold mb-4">
+            <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Formação Acadêmica</span>
                 <span data-lang="en">Education</span>
             </h2>
@@ -296,23 +297,50 @@
     </div>
 
     <script>
+        // Variável global para rastrear o idioma selecionado (padrão inicial: pt)
+        let currentLang = 'pt';
+
         function setLang(lang) {
+            currentLang = lang;
             document.querySelectorAll('[data-lang]').forEach(el => {
                 el.style.display = (el.getAttribute('data-lang') === lang) ? (el.tagName === 'SPAN' ? 'inline' : 'block') : 'none';
             });
         }
+
         function toggleSection(id, btn) {
             const container = document.getElementById(id);
             const hiddenElements = container.querySelectorAll('.hidden-extra');
+            
+            // Alterna a visibilidade dos elementos extras
             hiddenElements.forEach(el => el.classList.toggle('hidden'));
-            const isPt = document.querySelector('[data-lang="pt"]').style.display !== 'none';
-            if (id === 'projetos-grid') {
-                btn.innerHTML = btn.innerText.includes('Ver') || btn.innerText.includes('See') ? 
-                    (isPt ? 'Ver menos' : 'See less') : (isPt ? 'Ver mais projetos' : 'See more projects');
-            } else {
-                btn.innerHTML = btn.innerText.includes('Ver') || btn.innerText.includes('See') ? 
-                    (isPt ? 'Ver menos' : 'See less') : (isPt ? 'Ver mais experiências' : 'See more experience');
-            }
+            
+            // Verifica se a seção está expandida checando se o primeiro elemento extra NÃO tem a classe 'hidden'
+            const isExpanded = !hiddenElements[0].classList.contains('hidden');
+            
+            // Mapeamento dos textos corretos com base no ID da seção e estado de expansão
+            const textMap = {
+                'projetos-grid': {
+                    pt: isExpanded ? 'Ver menos' : 'Ver mais projetos',
+                    en: isExpanded ? 'See less' : 'See more projects'
+                },
+                'exp-list': {
+                    pt: isExpanded ? 'Ver menos' : 'Ver mais experiências',
+                    en: isExpanded ? 'See less' : 'See more experience'
+                },
+                'edu-list': {
+                    pt: isExpanded ? 'Ver menos' : 'Ver mais formações',
+                    en: isExpanded ? 'See less' : 'See more education'
+                }
+            };
+
+            // Atualiza o HTML mantendo as tags <span> de idioma intactas
+            btn.innerHTML = `
+                <span data-lang="pt">${textMap[id].pt}</span>
+                <span data-lang="en">${textMap[id].en}</span>
+            `;
+
+            // Garante que o span correto permaneça visível ou oculto com base no idioma atual do app
+            setLang(currentLang);
         }
     </script>
 </body>

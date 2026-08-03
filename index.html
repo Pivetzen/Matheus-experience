@@ -141,11 +141,24 @@
         </section>
     </div>
 
+    <!-- POPUP / MODAL DO PDF -->
+    <div id="pdf-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50 no-print">
+        <div class="bg-white w-full max-w-4xl h-[85vh] rounded-lg flex flex-col overflow-hidden shadow-2xl relative">
+            <div class="flex justify-between items-center p-4 border-b bg-gray-100">
+                <h3 class="font-bold text-gray-800">
+                    <span data-lang="pt">Visualizar Certificado</span>
+                    <span data-lang="en">View Certificate</span>
+                </h3>
+                <button onclick="closePdfModal()" class="text-gray-500 hover:text-red-600 font-bold text-xl px-2">✕</button>
+            </div>
+            <div class="flex-1 bg-gray-200">
+                <iframe id="pdf-frame" src="" class="w-full h-full border-0"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Script de Gerenciamento e Integração com Google Sheets -->
     <script>
-        // =========================================================================
-        // COLE AQUI AS URLS CSV PUBLICADAS DO SEU GOOGLE SHEETS PARA CADA ABA
-        // =========================================================================
         const URLS_SHEETS = {
             idiomas:      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=361636404&single=true&output=csv',
             projetos:     'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=1557015651&single=true&output=csv',
@@ -157,7 +170,24 @@
 
         let currentLang = 'pt';
 
-        // Altera visibilidade de idioma
+        // Função do Modal PDF
+        function openPdfModal(url) {
+            // Converte URLs normais do GitHub Blob para Raw para o iframe conseguir renderizar
+            let rawUrl = url;
+            if (url.includes('github.com') && url.includes('/blob/')) {
+                rawUrl = url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+            }
+            document.getElementById('pdf-frame').src = rawUrl;
+            document.getElementById('pdf-modal').classList.remove('hidden');
+            document.getElementById('pdf-modal').classList.add('flex');
+        }
+
+        function closePdfModal() {
+            document.getElementById('pdf-modal').classList.add('hidden');
+            document.getElementById('pdf-modal').classList.remove('flex');
+            document.getElementById('pdf-frame').src = '';
+        }
+
         function setLang(lang) {
             currentLang = lang;
             document.querySelectorAll('[data-lang]').forEach(el => {
@@ -166,7 +196,6 @@
             });
         }
 
-        // Alterna seções expansíveis (Ver Mais / Ver Menos)
         function toggleSection(id, btn) {
             const container = document.getElementById(id);
             const hiddenElements = container.querySelectorAll('.hidden-extra');
@@ -188,7 +217,6 @@
             }
         }
 
-        // Helper para buscar e parsear o CSV da aba
         async function fetchSheetData(url) {
             if (!url || url.includes('SUA_URL_CSV')) return [];
             try {
@@ -206,8 +234,6 @@
                 return [];
             }
         }
-
-        // --- RENDERIZADORES DE SEÇÃO ---
 
         async function loadIdiomas() {
             const data = await fetchSheetData(URLS_SHEETS.idiomas);
@@ -372,9 +398,9 @@
 
             data.forEach(item => {
                 const linkBtn = item.link_pdf ? `
-                    <a href="${item.link_pdf}" target="_blank" class="no-print text-sm bg-gray-100 hover:bg-blue-100 text-blue-700 font-medium px-3 py-1.5 rounded transition border border-blue-200 self-start md:self-auto">
+                    <button onclick="openPdfModal('${item.link_pdf}')" class="no-print text-sm bg-gray-100 hover:bg-blue-100 text-blue-700 font-medium px-3 py-1.5 rounded transition border border-blue-200 self-start md:self-auto cursor-pointer">
                         📄 <span data-lang="pt">Ver PDF</span><span data-lang="en">View PDF</span>
-                    </a>
+                    </button>
                 ` : '';
 
                 const card = `
@@ -416,8 +442,12 @@
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
             container.innerHTML = data.map(item => `
-                <span class="bg-gray-200 px-3 py-1 rounded">${item.nome}</span>
+                <span class="bg-gray-200 px-3 py-1 rounded">
+                    <span data-lang="pt">${item.nome_pt || item.nome}</span>
+                    <span data-lang="en">${item.nome_en || item.nome}</span>
+                </span>
             `).join('');
+            setLang(currentLang);
         }
 
         // Inicializador geral ao carregar a página

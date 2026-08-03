@@ -4,23 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matheus Maia | Experience</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PapaParse para conversão de CSV para JSON -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <style>
-        @media print { .no-print, .hidden-extra { display: block !important; } .print-hide { display: none; } }
-        /* Garante o estado inicial em português ocultando o inglês */
+        @media print { 
+            .no-print, .hidden-extra { display: block !important; } 
+            .print-hide { display: none; } 
+        }
+        /* Estado inicial dos idiomas */
         [data-lang="en"] { display: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 p-4 md:p-10">
 
     <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
-        <!-- Seleção de Idioma -->
+        
+        <!-- Botoes de Idioma -->
         <div class="no-print flex justify-end gap-2 mb-4">
-            <button onclick="setLang('pt')" class="text-2xl hover:scale-110 transition" title="Português">🇧🇷/🇵🇹</button>
-            <button onclick="setLang('en')" class="text-2xl hover:scale-110 transition" title="English">🇬🇧/🇺🇸</button>
+            <button onclick="setLang('pt')" class="text-2xl hover:scale-110 transition cursor-pointer" title="Português">🇧🇷/🇵🇹</button>
+            <button onclick="setLang('en')" class="text-2xl hover:scale-110 transition cursor-pointer" title="English">🇬🇧/🇺🇸</button>
         </div>
 
-        <!-- Cabeçalho -->
+        <!-- Cabeçalho Estático -->
         <header class="border-b pb-6 mb-6">
             <h1 class="text-4xl font-bold">Matheus Maia</h1>
             <p class="text-xl text-blue-600 font-semibold mt-2">
@@ -33,13 +40,13 @@
                 <span>🔗 <a href="https://www.linkedin.com/in/32-matheusmaia" target="_blank" class="underline hover:text-blue-600">LinkedIn: 32-matheusmaia</a></span>
                 <span>💻 <a href="https://github.com/Pivetzen" target="_blank" class="underline hover:text-blue-600">Github: Pivetzen</a></span>
             </div>
-            <button onclick="window.print()" class="no-print mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+            <button onclick="window.print()" class="no-print mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition cursor-pointer">
                 <span data-lang="pt">Baixar Currículo (PDF)</span>
                 <span data-lang="en">Download Resume (PDF)</span>
             </button>
         </header>
 
-        <!-- Resumo -->
+        <!-- Resumo Estático -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-3">
                 <span data-lang="pt">Resumo</span>
@@ -51,364 +58,377 @@
             </p>
         </section>
 
-        <!-- Idiomas -->
+        <!-- Idiomas (Dinâmico) -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-3">
                 <span data-lang="pt">Idiomas</span>
                 <span data-lang="en">Languages</span>
             </h2>
-            <div class="flex flex-wrap gap-4">
-                <div class="bg-gray-100 px-4 py-2 rounded">
-                    <span class="font-bold"><span data-lang="pt">Português:</span><span data-lang="en">Portuguese:</span></span> <span class="text-gray-700"><span data-lang="pt">Nativo</span><span data-lang="en">Native</span></span>
-                </div>
-                <div class="bg-gray-100 px-4 py-2 rounded">
-                    <span class="font-bold"><span data-lang="pt">Inglês:</span><span data-lang="en">English:</span></span> <span class="text-gray-700"><span data-lang="pt">Profissional Completo</span><span data-lang="en">Full Professional</span></span>
-                </div>
-                <div class="bg-gray-100 px-4 py-2 rounded">
-                    <span class="font-bold"><span data-lang="pt">Francês:</span><span data-lang="en">French:</span></span> <span class="text-gray-700"><span data-lang="pt">Intermediário</span><span data-lang="en">Intermediate</span></span>
-                </div>
+            <div id="idiomas-list" class="flex flex-wrap gap-4">
+                <p class="text-sm text-gray-500 italic">Carregando idiomas...</p>
             </div>
         </section>
         
-        <!-- Projetos -->
+        <!-- Projetos de Destaque (Dinâmico) -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Projetos de Destaque</span>
                 <span data-lang="en">Featured Projects</span>
             </h2>
-            <div id="projetos-grid" class="grid md:grid-cols-2 gap-4">
-                <a href="https://pivetzen.github.io/Blushops/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">Blushops</h3>
-                    <p class="text-xs text-gray-600 mt-1">
-                        <span data-lang="pt">E-commerce com foco em UX.</span>
-                        <span data-lang="en">E-commerce focused on UX.</span>
-                    </p>
-                </a>
-                <a href="https://pivetzen.github.io/desabafo-express/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                    <h3 class="font-bold text-lg text-blue-700">Desabafo Express</h3>
-                    <p class="text-xs text-gray-600 mt-1">
-                        <span data-lang="pt">Bem-estar e organização mental.</span>
-                        <span data-lang="en">Well-being and mental organization.</span>
-                    </p>
-                </a>
-                <div class="hidden-extra hidden contents">
-                    <a href="https://pivetzen.github.io/PetCare-Pro-Digital/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">PetCare Pro Digital</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Gestão de saúde pet.</span>
-                            <span data-lang="en">Pet health management.</span>
-                        </p>
-                    </a>
-                    <a href="https://pivetzen.github.io/medtracker/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">MedTracker</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Controle de medicações.</span>
-                            <span data-lang="en">Medication tracking.</span>
-                        </p>
-                    </a>
-                    <a href="https://pivetzen.github.io/PedraPapelTesoura/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">Pedra, Papel e Tesoura</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Lógica e gamificação.</span>
-                            <span data-lang="en">Logic and gamification.</span>
-                        </p>
-                    </a>
-                    <a href="https://pivetzen.github.io/InsuliCalc/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">InsuliCalc</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Cálculo glicêmico.</span>
-                            <span data-lang="en">Glycemic calculation.</span>
-                        </p>
-                    </a>
-                    <a href="https://pivetzen.github.io/Petzildo/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">Petzildo</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Bem-estar animal.</span>
-                            <span data-lang="en">Animal well-being.</span>
-                        </p>
-                    </a>
-                    <a href="https://pivetzen.github.io/assistente-de-oracoes/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">Assistente de Orações</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Apoio espiritual.</span>
-                            <span data-lang="en">Spiritual support.</span>
-                        </p>
-                    </a>
-                    <a href="https://pivetzen.github.io/Coach-Agressivo/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">Coach Agressivo</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Machuca, mas ajuda.</span>
-                            <span data-lang="en">It hurts, but it helps.</span>
-                        </p>
-                    </a>
-                     <a href="https://pivetzen.github.io/album-copa-2026/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
-                        <h3 class="font-bold text-lg text-blue-700">Album Panini World Cup 2026</h3>
-                        <p class="text-xs text-gray-600 mt-1">
-                            <span data-lang="pt">Acompanhe seu álbum de figurinhas da Copa do Mundo 2026.</span>
-                            <span data-lang="en">Track your World Cup 2026 Sticker album.</span>
-                        </p>
-                    </a>
-                </div>
+            <div id="projetos-list">
+                <p class="text-sm text-gray-500 italic">Carregando projetos...</p>
             </div>
-            <button onclick="toggleSection('projetos-grid', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+            <button id="btn-projetos" onclick="toggleSection('projetos-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline hidden cursor-pointer">
                 <span data-lang="pt">Ver mais projetos</span>
                 <span data-lang="en">See more projects</span>
             </button>
         </section>
 
-        <!-- Experiência Profissional -->
+        <!-- Experiência Profissional (Dinâmico) -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Experiência Profissional</span>
                 <span data-lang="en">Professional Experience</span>
             </h2>
-            <div id="exp-list" class="space-y-4">
-                <div class="border rounded p-4">
-                    <h3 class="font-bold">
-                        <span data-lang="pt">Assessor Administrativo-Financeiro | AMC</span>
-                        <span data-lang="en">Administrative-Financial Advisor | AMC</span>
-                    </h3>
-                    <p class="text-sm text-gray-600">(<span data-lang="pt">Atual</span><span data-lang="en">Current</span>)</p>
-                    <p class="text-sm text-gray-600 mt-1">
-                        <span data-lang="pt">Gestão de contratos, processos licitatórios e automação de monitoramento interno.</span>
-                        <span data-lang="en">Contract management, bidding processes, and internal monitoring automation.</span>
-                    </p>
-                </div>
-                <div class="hidden-extra hidden space-y-4">
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">Assistente em Gestão III | AMC</span>
-                            <span data-lang="en">Management Assistant III | AMC</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            <span data-lang="pt">Controle de contratos de publicidade e monitoramento financeiro operacional.</span>
-                            <span data-lang="en">Advertising contract control and operational financial monitoring.</span>
-                        </p>
-                    </div>
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">Coordenador Administrativo | Colégio Provecto</span>
-                            <span data-lang="en">Administrative Coordinator | Provecto School</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            <span data-lang="pt">Coordenação de equipes operacionais e gestão de suprimentos escolares.</span>
-                            <span data-lang="en">Operational team coordination and school supplies management.</span>
-                        </p>
-                    </div>
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">Assistente de Operações e Financeiro | Recanto do Criador</span>
-                            <span data-lang="en">Operations and Financial Assistant | Recanto do Criador</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            <span data-lang="pt">Controle de estoque, fluxo de caixa e operação de sistemas de varejo.</span>
-                            <span data-lang="en">Inventory control, cash flow, and retail system operation.</span>
-                        </p>
-                    </div>
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">Estagiário de Gestão de Projetos | SEBRAE-CE</span>
-                            <span data-lang="en">Project Management Intern | SEBRAE-CE</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            <span data-lang="pt">Apoio ao MEI e monitoramento de projetos de consultoria empresarial.</span>
-                            <span data-lang="en">Support for MEI and business consulting project monitoring.</span>
-                        </p>
-                    </div>
-                </div>
+            <div id="exp-list">
+                <p class="text-sm text-gray-500 italic">Carregando experiências...</p>
             </div>
-            <button onclick="toggleSection('exp-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+            <button id="btn-exp" onclick="toggleSection('exp-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline hidden cursor-pointer">
                 <span data-lang="pt">Ver mais experiências</span>
                 <span data-lang="en">See more experience</span>
             </button>
         </section>
 
-        <!-- Formação Acadêmica -->
+        <!-- Formação Acadêmica (Dinâmico) -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Formação Acadêmica</span>
                 <span data-lang="en">Education</span>
             </h2>
-            <div id="edu-list" class="space-y-4">
-                <div class="border rounded p-4">
-                    <h3 class="font-bold">
-                        <span data-lang="pt">Especialização em IA para Desenvolvedores</span>
-                        <span data-lang="en">Specialization in AI for Developers</span>
-                    </h3>
-                    <p class="text-sm text-gray-600">
-                        <span>Faculdade Pitágoras</span> | 
-                        <span class="italic text-blue-600">
-                            <span data-lang="pt">Em andamento</span>
-                            <span data-lang="en">In progress</span>
-                        </span>
-                    </p>
-                </div>
-                <div class="hidden-extra hidden space-y-4">
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">Pós-Graduação em Engenharia de Software</span>
-                            <span data-lang="en">Postgraduate Degree in Software Engineering</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">Faculdade Pitágoras</p>
-                    </div>
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">MBA em Logística Empresarial</span>
-                            <span data-lang="en">MBA in Business Logistics</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">Universidade Estácio de Sá</p>
-                    </div>
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">Pós-Graduação em Gestão Financeira e Controladoria</span>
-                            <span data-lang="en">Postgraduate Degree in Financial Management and Control</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">Universidade Estácio de Sá</p>
-                    </div>
-                    <div class="border rounded p-4">
-                        <h3 class="font-bold">
-                            <span data-lang="pt">Graduação em Administração de Empresas</span>
-                            <span data-lang="en">Bachelor's Degree in Business Administration</span>
-                        </h3>
-                        <p class="text-sm text-gray-600">UFC — Universidade Federal do Ceará</p>
-                    </div>
-                </div>
+            <div id="edu-list">
+                <p class="text-sm text-gray-500 italic">Carregando formação...</p>
             </div>
-            <button onclick="toggleSection('edu-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+            <button id="btn-edu" onclick="toggleSection('edu-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline hidden cursor-pointer">
                 <span data-lang="pt">Ver mais formações</span>
                 <span data-lang="en">See more education</span>
             </button>
         </section>
 
-        <!-- Certificados e Cursos (NOVA SEÇÃO) -->
+        <!-- Certificados e Cursos (Dinâmico) -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Certificados e Cursos</span>
                 <span data-lang="en">Certifications & Courses</span>
             </h2>
-            <div id="cert-list" class="space-y-3">
-                
-                <!-- Certificado Exemplo 1 -->
-                <div class="border rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
-                    <div>
-                        <h3 class="font-bold text-gray-800">
-                            <span data-lang="pt">Análise de Dados e Automação com Google Sheets</span>
-                            <span data-lang="en">Data Analysis & Automation with Google Sheets</span>
-                        </h3>
-                        <p class="text-xs text-gray-600 mt-1">Instituição Exemplo • 2025</p>
-                    </div>
-                    <!-- Substitua o atributo href pelo caminho do PDF (ex: ./certificados/sheets.pdf ou link do Google Drive/Coursera) -->
-                    <a href="#" target="_blank" class="no-print text-sm bg-gray-100 hover:bg-blue-100 text-blue-700 font-medium px-3 py-1.5 rounded transition self-start md:self-auto border border-blue-200">
-                        📄 <span data-lang="pt">Ver PDF</span><span data-lang="en">View PDF</span>
-                    </a>
-                </div>
-
-                <!-- Certificados Extras (Ocultos por padrão) -->
-                <div class="hidden-extra hidden space-y-3">
-                    
-                    <!-- Certificado Exemplo 2 -->
-                    <div class="border rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
-                        <div>
-                            <h3 class="font-bold text-gray-800">
-                                <span data-lang="pt">Desenvolvimento Front-End Avançado</span>
-                                <span data-lang="en">Advanced Front-End Development</span>
-                            </h3>
-                            <p class="text-xs text-gray-600 mt-1">Instituição Exemplo • 2024</p>
-                        </div>
-                        <a href="#" target="_blank" class="no-print text-sm bg-gray-100 hover:bg-blue-100 text-blue-700 font-medium px-3 py-1.5 rounded transition self-start md:self-auto border border-blue-200">
-                            📄 <span data-lang="pt">Ver PDF</span><span data-lang="en">View PDF</span>
-                        </a>
-                    </div>
-
-                </div>
+            <div id="cert-list">
+                <p class="text-sm text-gray-500 italic">Carregando certificados...</p>
             </div>
-            <button onclick="toggleSection('cert-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+            <button id="btn-cert" onclick="toggleSection('cert-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline hidden cursor-pointer">
                 <span data-lang="pt">Ver mais certificados</span>
                 <span data-lang="en">See more certificates</span>
             </button>
         </section>
 
-        <!-- Competências Técnicas -->
+        <!-- Competências Técnicas (Dinâmico) -->
         <section>
             <h2 class="text-2xl font-bold mb-3">
                 <span data-lang="pt">Competências Técnicas</span>
                 <span data-lang="en">Technical Skills</span>
             </h2>
-            <div class="flex flex-wrap gap-2">
-                <span class="bg-gray-200 px-3 py-1 rounded">JavaScript</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">HTML</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">CSS</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Python</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Google Apps Script</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">GitHub</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Firebase</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">Visual Studio</span>
-                <span class="bg-gray-200 px-3 py-1 rounded">
-                    <span data-lang="pt">Análise de Dados</span>
-                    <span data-lang="en">Data Analysis</span>
-                </span>
-                <span class="bg-gray-200 px-3 py-1 rounded">
-                    <span data-lang="pt">Automação de Processos</span>
-                    <span data-lang="en">Process Automation</span>
-                </span>
-                <span class="bg-gray-200 px-3 py-1 rounded">
-                    <span data-lang="pt">Treinamento LLM</span>
-                    <span data-lang="en">LLM Training</span>
-                </span>
+            <div id="habilidades-list" class="flex flex-wrap gap-2">
+                <p class="text-sm text-gray-500 italic">Carregando competências...</p>
             </div>
         </section>
     </div>
 
+    <!-- Script de Gerenciamento e Integração com Google Sheets -->
     <script>
-        // Variável global para rastrear o idioma selecionado (padrão inicial: pt)
+        // =========================================================================
+        // COLE AQUI AS URLS CSV PUBLICADAS DO SEU GOOGLE SHEETS PARA CADA ABA
+        // =========================================================================
+        const URLS_SHEETS = {
+            idiomas:      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=361636404&single=true&output=csv',
+            projetos:     'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=1557015651&single=true&output=csv',
+            experiencias: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=128372550&single=true&output=csv',
+            formacao:     'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=1975358631&single=true&output=csv',
+            certificados: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=341211247&single=true&output=csv',
+            habilidades:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEi2CpFBwjVUm0ijTVmaWcQuAMEvCIq7-hLPHpmT2bUMqXZwSMOqzaznSiplahhk6V0Ra1E6I_0LPd/pub?gid=1838144788&single=true&output=csv'
+        };
+
         let currentLang = 'pt';
 
+        // Altera visibilidade de idioma
         function setLang(lang) {
             currentLang = lang;
             document.querySelectorAll('[data-lang]').forEach(el => {
-                el.style.display = (el.getAttribute('data-lang') === lang) ? (el.tagName === 'SPAN' ? 'inline' : 'block') : 'none';
+                const targetDisplay = el.tagName === 'SPAN' ? 'inline' : 'block';
+                el.style.display = (el.getAttribute('data-lang') === lang) ? targetDisplay : 'none';
             });
         }
 
+        // Alterna seções expansíveis (Ver Mais / Ver Menos)
         function toggleSection(id, btn) {
             const container = document.getElementById(id);
             const hiddenElements = container.querySelectorAll('.hidden-extra');
-            
-            // Alterna a visibilidade dos elementos extras
+            if (!hiddenElements.length) return;
+
             hiddenElements.forEach(el => el.classList.toggle('hidden'));
-            
-            // Verifica se a seção está expandida checando se o primeiro elemento extra NÃO tem a classe 'hidden'
             const isExpanded = !hiddenElements[0].classList.contains('hidden');
-            
-            // Mapeamento dos textos corretos com base no ID da seção e estado de expansão
+
             const textMap = {
-                'projetos-grid': {
-                    pt: isExpanded ? 'Ver menos' : 'Ver mais projetos',
-                    en: isExpanded ? 'See less' : 'See more projects'
-                },
-                'exp-list': {
-                    pt: isExpanded ? 'Ver menos' : 'Ver mais experiências',
-                    en: isExpanded ? 'See less' : 'See more experience'
-                },
-                'edu-list': {
-                    pt: isExpanded ? 'Ver menos' : 'Ver mais formações',
-                    en: isExpanded ? 'See less' : 'See more education'
-                },
-                'cert-list': {
-                    pt: isExpanded ? 'Ver menos' : 'Ver mais certificados',
-                    en: isExpanded ? 'See less' : 'See more certificates'
-                }
+                'projetos-list': { pt: isExpanded ? 'Ver menos' : 'Ver mais projetos', en: isExpanded ? 'See less' : 'See more projects' },
+                'exp-list':      { pt: isExpanded ? 'Ver menos' : 'Ver mais experiências', en: isExpanded ? 'See less' : 'See more experience' },
+                'edu-list':      { pt: isExpanded ? 'Ver menos' : 'Ver mais formações', en: isExpanded ? 'See less' : 'See more education' },
+                'cert-list':     { pt: isExpanded ? 'Ver menos' : 'Ver mais certificados', en: isExpanded ? 'See less' : 'See more certificates' }
             };
 
-            // Atualiza o HTML mantendo as tags <span> de idioma intactas
-            btn.innerHTML = `
-                <span data-lang="pt">${textMap[id].pt}</span>
-                <span data-lang="en">${textMap[id].en}</span>
-            `;
+            if (textMap[id]) {
+                btn.innerHTML = `<span data-lang="pt">${textMap[id].pt}</span><span data-lang="en">${textMap[id].en}</span>`;
+                setLang(currentLang);
+            }
+        }
 
-            // Garante que o span correto permaneça visível ou oculto com base no idioma atual do app
+        // Helper para buscar e parsear o CSV da aba
+        async function fetchSheetData(url) {
+            if (!url || url.includes('SUA_URL_CSV')) return [];
+            try {
+                const res = await fetch(url);
+                const csvText = await res.text();
+                return new Promise((resolve) => {
+                    Papa.parse(csvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: (results) => resolve(results.data)
+                    });
+                });
+            } catch (err) {
+                console.error('Erro ao buscar dados:', err);
+                return [];
+            }
+        }
+
+        // --- RENDERIZADORES DE SEÇÃO ---
+
+        async function loadIdiomas() {
+            const data = await fetchSheetData(URLS_SHEETS.idiomas);
+            const container = document.getElementById('idiomas-list');
+            if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhum idioma cadastrado.</p>'; return; }
+
+            data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
+            container.innerHTML = data.map(item => `
+                <div class="bg-gray-100 px-4 py-2 rounded">
+                    <span class="font-bold">
+                        <span data-lang="pt">${item.idioma_pt}:</span>
+                        <span data-lang="en">${item.idioma_en}:</span>
+                    </span> 
+                    <span class="text-gray-700">
+                        <span data-lang="pt">${item.nivel_pt}</span>
+                        <span data-lang="en">${item.nivel_en}</span>
+                    </span>
+                </div>
+            `).join('');
             setLang(currentLang);
         }
+
+        async function loadProjetos() {
+            const data = await fetchSheetData(URLS_SHEETS.projetos);
+            const container = document.getElementById('projetos-list');
+            const btn = document.getElementById('btn-projetos');
+            if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhum projeto cadastrado.</p>'; return; }
+
+            data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
+
+            let mainHTML = '';
+            let extraHTML = '';
+
+            data.forEach(item => {
+                const card = `
+                    <a href="${item.link || '#'}" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
+                        <h3 class="font-bold text-lg text-blue-700">${item.titulo}</h3>
+                        <p class="text-xs text-gray-600 mt-1">
+                            <span data-lang="pt">${item.descricao_pt}</span>
+                            <span data-lang="en">${item.descricao_en}</span>
+                        </p>
+                    </a>
+                `;
+                if ((item.destaque || '').toUpperCase() === 'SIM') {
+                    mainHTML += card;
+                } else {
+                    extraHTML += card;
+                }
+            });
+
+            let finalHTML = `<div class="grid md:grid-cols-2 gap-4">${mainHTML}`;
+            if (extraHTML) {
+                finalHTML += `<div class="hidden-extra hidden contents">${extraHTML}</div>`;
+                btn.classList.remove('hidden');
+            }
+            finalHTML += `</div>`;
+
+            container.innerHTML = finalHTML;
+            setLang(currentLang);
+        }
+
+        async function loadExperiencias() {
+            const data = await fetchSheetData(URLS_SHEETS.experiencias);
+            const container = document.getElementById('exp-list');
+            const btn = document.getElementById('btn-exp');
+            if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhuma experiência cadastrada.</p>'; return; }
+
+            data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
+
+            let mainHTML = '';
+            let extraHTML = '';
+
+            data.forEach(item => {
+                const card = `
+                    <div class="border rounded p-4 mb-4">
+                        <h3 class="font-bold">
+                            <span data-lang="pt">${item.cargo_pt} | ${item.empresa}</span>
+                            <span data-lang="en">${item.cargo_en} | ${item.empresa}</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            (<span data-lang="pt">${item.periodo_pt}</span><span data-lang="en">${item.periodo_en}</span>)
+                        </p>
+                        <p class="text-sm text-gray-600 mt-1">
+                            <span data-lang="pt">${item.descricao_pt}</span>
+                            <span data-lang="en">${item.descricao_en}</span>
+                        </p>
+                    </div>
+                `;
+                if ((item.destaque || '').toUpperCase() === 'SIM') {
+                    mainHTML += card;
+                } else {
+                    extraHTML += card;
+                }
+            });
+
+            let finalHTML = `<div class="space-y-4">${mainHTML}`;
+            if (extraHTML) {
+                finalHTML += `<div class="hidden-extra hidden space-y-4">${extraHTML}</div>`;
+                btn.classList.remove('hidden');
+            }
+            finalHTML += `</div>`;
+
+            container.innerHTML = finalHTML;
+            setLang(currentLang);
+        }
+
+        async function loadFormacao() {
+            const data = await fetchSheetData(URLS_SHEETS.formacao);
+            const container = document.getElementById('edu-list');
+            const btn = document.getElementById('btn-edu');
+            if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhuma formação cadastrada.</p>'; return; }
+
+            data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
+
+            let mainHTML = '';
+            let extraHTML = '';
+
+            data.forEach(item => {
+                const card = `
+                    <div class="border rounded p-4 mb-4">
+                        <h3 class="font-bold">
+                            <span data-lang="pt">${item.curso_pt}</span>
+                            <span data-lang="en">${item.curso_en}</span>
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            <span>${item.instituicao}</span> | 
+                            <span class="italic text-blue-600">
+                                <span data-lang="pt">${item.status_pt}</span>
+                                <span data-lang="en">${item.status_en}</span>
+                            </span>
+                        </p>
+                    </div>
+                `;
+                if ((item.destaque || '').toUpperCase() === 'SIM') {
+                    mainHTML += card;
+                } else {
+                    extraHTML += card;
+                }
+            });
+
+            let finalHTML = `<div class="space-y-4">${mainHTML}`;
+            if (extraHTML) {
+                finalHTML += `<div class="hidden-extra hidden space-y-4">${extraHTML}</div>`;
+                btn.classList.remove('hidden');
+            }
+            finalHTML += `</div>`;
+
+            container.innerHTML = finalHTML;
+            setLang(currentLang);
+        }
+
+        async function loadCertificados() {
+            const data = await fetchSheetData(URLS_SHEETS.certificados);
+            const container = document.getElementById('cert-list');
+            const btn = document.getElementById('btn-cert');
+            if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhum certificado cadastrado.</p>'; return; }
+
+            data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
+
+            let mainHTML = '';
+            let extraHTML = '';
+
+            data.forEach(item => {
+                const linkBtn = item.link_pdf ? `
+                    <a href="${item.link_pdf}" target="_blank" class="no-print text-sm bg-gray-100 hover:bg-blue-100 text-blue-700 font-medium px-3 py-1.5 rounded transition border border-blue-200 self-start md:self-auto">
+                        📄 <span data-lang="pt">Ver PDF</span><span data-lang="en">View PDF</span>
+                    </a>
+                ` : '';
+
+                const card = `
+                    <div class="border rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="font-bold text-gray-800">
+                                <span data-lang="pt">${item.titulo_pt}</span>
+                                <span data-lang="en">${item.titulo_en}</span>
+                            </h3>
+                            <p class="text-xs text-gray-600 mt-1">${item.emissor} • ${item.ano}</p>
+                        </div>
+                        ${linkBtn}
+                    </div>
+                `;
+
+                if ((item.destaque || '').toUpperCase() === 'SIM') {
+                    mainHTML += card;
+                } else {
+                    extraHTML += card;
+                }
+            });
+
+            let finalHTML = `<div class="space-y-3">${mainHTML}`;
+            if (extraHTML) {
+                finalHTML += `<div class="hidden-extra hidden space-y-3">${extraHTML}</div>`;
+                btn.classList.remove('hidden');
+            }
+            finalHTML += `</div>`;
+
+            container.innerHTML = finalHTML;
+            setLang(currentLang);
+        }
+
+        async function loadHabilidades() {
+            const data = await fetchSheetData(URLS_SHEETS.habilidades);
+            const container = document.getElementById('habilidades-list');
+            if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhuma habilidade cadastrada.</p>'; return; }
+
+            data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
+
+            container.innerHTML = data.map(item => `
+                <span class="bg-gray-200 px-3 py-1 rounded">${item.nome}</span>
+            `).join('');
+        }
+
+        // Inicializador geral ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            loadIdiomas();
+            loadProjetos();
+            loadExperiencias();
+            loadFormacao();
+            loadCertificados();
+            loadHabilidades();
+        });
     </script>
 </body>
 </html>

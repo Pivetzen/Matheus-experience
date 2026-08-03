@@ -441,12 +441,18 @@
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            container.innerHTML = data.map(item => `
-                <span class="bg-gray-200 px-3 py-1 rounded">
-                    <span data-lang="pt">${item.nome_pt || item.nome}</span>
-                    <span data-lang="en">${item.nome_en || item.nome}</span>
-                </span>
-            `).join('');
+            container.innerHTML = data.map(item => {
+                const nomePt = item.nome_pt || item.nome || '';
+                const nomeEn = item.nome_en || item.nome || nomePt;
+
+                return `
+                    <span class="bg-gray-200 px-3 py-1 rounded">
+                        <span data-lang="pt">${nomePt}</span>
+                        <span data-lang="en">${nomeEn}</span>
+                    </span>
+                `;
+            }).join('');
+            
             setLang(currentLang);
         }
 

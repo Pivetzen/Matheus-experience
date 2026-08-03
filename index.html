@@ -138,6 +138,10 @@
             <div id="habilidades-list" class="flex flex-wrap gap-2">
                 <p class="text-sm text-gray-500 italic">Carregando competências...</p>
             </div>
+            <button id="btn-habilidades" onclick="toggleSection('habilidades-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline hidden cursor-pointer">
+                <span data-lang="pt">Ver mais competências</span>
+                <span data-lang="en">See more skills</span>
+            </button>
         </section>
     </div>
 
@@ -205,10 +209,11 @@
             const isExpanded = !hiddenElements[0].classList.contains('hidden');
 
             const textMap = {
-                'projetos-list': { pt: isExpanded ? 'Ver menos' : 'Ver mais projetos', en: isExpanded ? 'See less' : 'See more projects' },
-                'exp-list':      { pt: isExpanded ? 'Ver menos' : 'Ver mais experiências', en: isExpanded ? 'See less' : 'See more experience' },
-                'edu-list':      { pt: isExpanded ? 'Ver menos' : 'Ver mais formações', en: isExpanded ? 'See less' : 'See more education' },
-                'cert-list':     { pt: isExpanded ? 'Ver menos' : 'Ver mais certificados', en: isExpanded ? 'See less' : 'See more certificates' }
+                'projetos-list':    { pt: isExpanded ? 'Ver menos' : 'Ver mais projetos', en: isExpanded ? 'See less' : 'See more projects' },
+                'exp-list':         { pt: isExpanded ? 'Ver menos' : 'Ver mais experiências', en: isExpanded ? 'See less' : 'See more experience' },
+                'edu-list':         { pt: isExpanded ? 'Ver menos' : 'Ver mais formações', en: isExpanded ? 'See less' : 'See more education' },
+                'cert-list':        { pt: isExpanded ? 'Ver menos' : 'Ver mais certificados', en: isExpanded ? 'See less' : 'See more certificates' },
+                'habilidades-list': { pt: isExpanded ? 'Ver menos' : 'Ver mais competências', en: isExpanded ? 'See less' : 'See more skills' }
             };
 
             if (textMap[id]) {
@@ -437,22 +442,39 @@
         async function loadHabilidades() {
             const data = await fetchSheetData(URLS_SHEETS.habilidades);
             const container = document.getElementById('habilidades-list');
+            const btn = document.getElementById('btn-habilidades');
             if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhuma habilidade cadastrada.</p>'; return; }
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            container.innerHTML = data.map(item => {
+            let mainHTML = '';
+            let extraHTML = '';
+
+            data.forEach(item => {
                 const nomePt = item.nome_pt || item.nome || '';
                 const nomeEn = item.nome_en || item.nome || nomePt;
 
-                return `
+                const badge = `
                     <span class="bg-gray-200 px-3 py-1 rounded">
                         <span data-lang="pt">${nomePt}</span>
                         <span data-lang="en">${nomeEn}</span>
                     </span>
                 `;
-            }).join('');
-            
+
+                if ((item.destaque || '').toUpperCase() === 'SIM') {
+                    mainHTML += badge;
+                } else {
+                    extraHTML += badge;
+                }
+            });
+
+            let finalHTML = mainHTML;
+            if (extraHTML) {
+                finalHTML += `<div class="hidden-extra hidden flex flex-wrap gap-2 mt-2">${extraHTML}</div>`;
+                btn.classList.remove('hidden');
+            }
+
+            container.innerHTML = finalHTML;
             setLang(currentLang);
         }
 

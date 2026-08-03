@@ -14,11 +14,13 @@
 <body class="bg-gray-50 text-gray-900 p-4 md:p-10">
 
     <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <!-- Seleção de Idioma -->
         <div class="no-print flex justify-end gap-2 mb-4">
             <button onclick="setLang('pt')" class="text-2xl hover:scale-110 transition" title="Português">🇧🇷/🇵🇹</button>
             <button onclick="setLang('en')" class="text-2xl hover:scale-110 transition" title="English">🇬🇧/🇺🇸</button>
         </div>
 
+        <!-- Cabeçalho -->
         <header class="border-b pb-6 mb-6">
             <h1 class="text-4xl font-bold">Matheus Maia</h1>
             <p class="text-xl text-blue-600 font-semibold mt-2">
@@ -28,8 +30,8 @@
             <div class="mt-4 text-sm text-gray-600 flex flex-wrap gap-4">
                 <span>📍 Fortaleza, Ceará</span>
                 <span>📧 mail: matheusmaia03@gmail.com</span>
-                <span>🔗 <a href="https://www.linkedin.com/in/32-matheusmaia" class="underline">LinkedIn: 32-matheusmaia</a></span>
-                <span>💻 <a href="https://github.com/Pivetzen" class="underline">Github: Pivetzen</a></span>
+                <span>🔗 <a href="https://www.linkedin.com/in/32-matheusmaia" target="_blank" class="underline hover:text-blue-600">LinkedIn: 32-matheusmaia</a></span>
+                <span>💻 <a href="https://github.com/Pivetzen" target="_blank" class="underline hover:text-blue-600">Github: Pivetzen</a></span>
             </div>
             <button onclick="window.print()" class="no-print mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
                 <span data-lang="pt">Baixar Currículo (PDF)</span>
@@ -37,6 +39,7 @@
             </button>
         </header>
 
+        <!-- Resumo -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-3">
                 <span data-lang="pt">Resumo</span>
@@ -48,6 +51,7 @@
             </p>
         </section>
 
+        <!-- Idiomas -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-3">
                 <span data-lang="pt">Idiomas</span>
@@ -66,20 +70,21 @@
             </div>
         </section>
         
+        <!-- Projetos -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Projetos de Destaque</span>
                 <span data-lang="en">Featured Projects</span>
             </h2>
             <div id="projetos-grid" class="grid md:grid-cols-2 gap-4">
-                <a href="https://pivetzen.github.io/Blushops/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                <a href="https://pivetzen.github.io/Blushops/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                     <h3 class="font-bold text-lg text-blue-700">Blushops</h3>
                     <p class="text-xs text-gray-600 mt-1">
                         <span data-lang="pt">E-commerce com foco em UX.</span>
                         <span data-lang="en">E-commerce focused on UX.</span>
                     </p>
                 </a>
-                <a href="https://pivetzen.github.io/desabafo-express/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                <a href="https://pivetzen.github.io/desabafo-express/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                     <h3 class="font-bold text-lg text-blue-700">Desabafo Express</h3>
                     <p class="text-xs text-gray-600 mt-1">
                         <span data-lang="pt">Bem-estar e organização mental.</span>
@@ -87,56 +92,56 @@
                     </p>
                 </a>
                 <div class="hidden-extra hidden contents">
-                    <a href="https://pivetzen.github.io/PetCare-Pro-Digital/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                    <a href="https://pivetzen.github.io/PetCare-Pro-Digital/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">PetCare Pro Digital</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Gestão de saúde pet.</span>
                             <span data-lang="en">Pet health management.</span>
                         </p>
                     </a>
-                    <a href="https://pivetzen.github.io/medtracker/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                    <a href="https://pivetzen.github.io/medtracker/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">MedTracker</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Controle de medicações.</span>
                             <span data-lang="en">Medication tracking.</span>
                         </p>
                     </a>
-                    <a href="https://pivetzen.github.io/PedraPapelTesoura/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                    <a href="https://pivetzen.github.io/PedraPapelTesoura/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">Pedra, Papel e Tesoura</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Lógica e gamificação.</span>
                             <span data-lang="en">Logic and gamification.</span>
                         </p>
                     </a>
-                    <a href="https://pivetzen.github.io/InsuliCalc/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                    <a href="https://pivetzen.github.io/InsuliCalc/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">InsuliCalc</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Cálculo glicêmico.</span>
                             <span data-lang="en">Glycemic calculation.</span>
                         </p>
                     </a>
-                    <a href="https://pivetzen.github.io/Petzildo/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                    <a href="https://pivetzen.github.io/Petzildo/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">Petzildo</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Bem-estar animal.</span>
                             <span data-lang="en">Animal well-being.</span>
                         </p>
                     </a>
-                    <a href="https://pivetzen.github.io/assistente-de-oracoes/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                    <a href="https://pivetzen.github.io/assistente-de-oracoes/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">Assistente de Orações</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Apoio espiritual.</span>
                             <span data-lang="en">Spiritual support.</span>
                         </p>
                     </a>
-                    <a href="https://pivetzen.github.io/Coach-Agressivo/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                    <a href="https://pivetzen.github.io/Coach-Agressivo/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">Coach Agressivo</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Machuca, mas ajuda.</span>
                             <span data-lang="en">It hurts, but it helps.</span>
                         </p>
                     </a>
-                     <a href="https://pivetzen.github.io/album-copa-2026/" class="border rounded p-4 hover:bg-blue-50 transition block">
+                     <a href="https://pivetzen.github.io/album-copa-2026/" target="_blank" class="border rounded p-4 hover:bg-blue-50 transition block">
                         <h3 class="font-bold text-lg text-blue-700">Album Panini World Cup 2026</h3>
                         <p class="text-xs text-gray-600 mt-1">
                             <span data-lang="pt">Acompanhe seu álbum de figurinhas da Copa do Mundo 2026.</span>
@@ -151,6 +156,7 @@
             </button>
         </section>
 
+        <!-- Experiência Profissional -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Experiência Profissional</span>
@@ -163,7 +169,7 @@
                         <span data-lang="en">Administrative-Financial Advisor | AMC</span>
                     </h3>
                     <p class="text-sm text-gray-600">(<span data-lang="pt">Atual</span><span data-lang="en">Current</span>)</p>
-                    <p class="text-sm text-gray-600">
+                    <p class="text-sm text-gray-600 mt-1">
                         <span data-lang="pt">Gestão de contratos, processos licitatórios e automação de monitoramento interno.</span>
                         <span data-lang="en">Contract management, bidding processes, and internal monitoring automation.</span>
                     </p>
@@ -217,6 +223,7 @@
             </button>
         </section>
 
+        <!-- Formação Acadêmica -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
                 <span data-lang="pt">Formação Acadêmica</span>
@@ -273,6 +280,55 @@
             </button>
         </section>
 
+        <!-- Certificados e Cursos (NOVA SEÇÃO) -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">
+                <span data-lang="pt">Certificados e Cursos</span>
+                <span data-lang="en">Certifications & Courses</span>
+            </h2>
+            <div id="cert-list" class="space-y-3">
+                
+                <!-- Certificado Exemplo 1 -->
+                <div class="border rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                    <div>
+                        <h3 class="font-bold text-gray-800">
+                            <span data-lang="pt">Análise de Dados e Automação com Google Sheets</span>
+                            <span data-lang="en">Data Analysis & Automation with Google Sheets</span>
+                        </h3>
+                        <p class="text-xs text-gray-600 mt-1">Instituição Exemplo • 2025</p>
+                    </div>
+                    <!-- Substitua o atributo href pelo caminho do PDF (ex: ./certificados/sheets.pdf ou link do Google Drive/Coursera) -->
+                    <a href="#" target="_blank" class="no-print text-sm bg-gray-100 hover:bg-blue-100 text-blue-700 font-medium px-3 py-1.5 rounded transition self-start md:self-auto border border-blue-200">
+                        📄 <span data-lang="pt">Ver PDF</span><span data-lang="en">View PDF</span>
+                    </a>
+                </div>
+
+                <!-- Certificados Extras (Ocultos por padrão) -->
+                <div class="hidden-extra hidden space-y-3">
+                    
+                    <!-- Certificado Exemplo 2 -->
+                    <div class="border rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-bold text-gray-800">
+                                <span data-lang="pt">Desenvolvimento Front-End Avançado</span>
+                                <span data-lang="en">Advanced Front-End Development</span>
+                            </h3>
+                            <p class="text-xs text-gray-600 mt-1">Instituição Exemplo • 2024</p>
+                        </div>
+                        <a href="#" target="_blank" class="no-print text-sm bg-gray-100 hover:bg-blue-100 text-blue-700 font-medium px-3 py-1.5 rounded transition self-start md:self-auto border border-blue-200">
+                            📄 <span data-lang="pt">Ver PDF</span><span data-lang="en">View PDF</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <button onclick="toggleSection('cert-list', this)" class="no-print mt-4 text-blue-600 font-semibold hover:underline">
+                <span data-lang="pt">Ver mais certificados</span>
+                <span data-lang="en">See more certificates</span>
+            </button>
+        </section>
+
+        <!-- Competências Técnicas -->
         <section>
             <h2 class="text-2xl font-bold mb-3">
                 <span data-lang="pt">Competências Técnicas</span>
@@ -337,6 +393,10 @@
                 'edu-list': {
                     pt: isExpanded ? 'Ver menos' : 'Ver mais formações',
                     en: isExpanded ? 'See less' : 'See more education'
+                },
+                'cert-list': {
+                    pt: isExpanded ? 'Ver menos' : 'Ver mais certificados',
+                    en: isExpanded ? 'See less' : 'See more certificates'
                 }
             };
 

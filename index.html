@@ -10,8 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <style>
         @media print { 
-            .no-print, .hidden-extra { display: block !important; } 
-            .print-hide { display: none; } 
+            .no-print { display: none !important; } 
+            .hidden-extra { display: block !important; } 
         }
         /* Estado inicial dos idiomas */
         [data-lang="en"] { display: none; }
@@ -20,7 +20,7 @@
 <body class="bg-gray-50 text-gray-900 p-4 md:p-10">
 
     <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
-        
+
         <!-- Botoes de Idioma -->
         <div class="no-print flex justify-end gap-2 mb-4">
             <button onclick="setLang('pt')" class="text-2xl hover:scale-110 transition cursor-pointer" title="Português">🇧🇷/🇵🇹</button>
@@ -68,7 +68,7 @@
                 <p class="text-sm text-gray-500 italic">Carregando idiomas...</p>
             </div>
         </section>
-        
+
         <!-- Projetos de Destaque (Dinâmico) -->
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">
@@ -145,22 +145,6 @@
         </section>
     </div>
 
-    <!-- POPUP / MODAL DO PDF -->
-    <div id="pdf-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50 no-print">
-        <div class="bg-white w-full max-w-4xl h-[85vh] rounded-lg flex flex-col overflow-hidden shadow-2xl relative">
-            <div class="flex justify-between items-center p-4 border-b bg-gray-100">
-                <h3 class="font-bold text-gray-800">
-                    <span data-lang="pt">Visualizar Certificado</span>
-                    <span data-lang="en">View Certificate</span>
-                </h3>
-                <button onclick="closePdfModal()" class="text-gray-500 hover:text-red-600 font-bold text-xl px-2">✕</button>
-            </div>
-            <div class="flex-1 bg-gray-200">
-                <iframe id="pdf-frame" src="" class="w-full h-full border-0"></iframe>
-            </div>
-        </div>
-    </div>
-
     <!-- Script de Gerenciamento e Integração com Google Sheets -->
     <script>
         const URLS_SHEETS = {
@@ -173,24 +157,6 @@
         };
 
         let currentLang = 'pt';
-
-        // Função do Modal PDF
-        function openPdfModal(url) {
-            // Converte URLs normais do GitHub Blob para Raw para o iframe conseguir renderizar
-            let rawUrl = url;
-            if (url.includes('github.com') && url.includes('/blob/')) {
-                rawUrl = url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-            }
-            document.getElementById('pdf-frame').src = rawUrl;
-            document.getElementById('pdf-modal').classList.remove('hidden');
-            document.getElementById('pdf-modal').classList.add('flex');
-        }
-
-        function closePdfModal() {
-            document.getElementById('pdf-modal').classList.add('hidden');
-            document.getElementById('pdf-modal').classList.remove('flex');
-            document.getElementById('pdf-frame').src = '';
-        }
 
         function setLang(lang) {
             currentLang = lang;
@@ -402,16 +368,14 @@
             let extraHTML = '';
 
             data.forEach(item => {
+                // Botão de PDF removido conforme solicitado
                 const card = `
-                    <div class="border rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                            <h3 class="font-bold text-gray-800">
-                                <span data-lang="pt">${item.titulo_pt}</span>
-                                <span data-lang="en">${item.titulo_en}</span>
-                            </h3>
-                            <p class="text-xs text-gray-600 mt-1">${item.emissor} • ${item.ano}</p>
-                        </div>
-                        ${linkBtn}
+                    <div class="border rounded p-4 mb-3">
+                        <h3 class="font-bold text-gray-800">
+                            <span data-lang="pt">${item.titulo_pt}</span>
+                            <span data-lang="en">${item.titulo_en}</span>
+                        </h3>
+                        <p class="text-xs text-gray-600 mt-1">${item.emissor} • ${item.ano}</p>
                     </div>
                 `;
 

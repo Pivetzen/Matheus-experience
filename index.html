@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matheus Maia | CV</title>
+    <title>Matheus Maia | CV Customizável</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- PapaParse para conversão de CSV para JSON -->
@@ -11,10 +11,9 @@
     <style>
         @page {
             size: A4;
-            margin: 12mm 12mm 12mm 12mm;
+            margin: 12mm;
         }
 
-        /* Estado inicial dos idiomas no visualizador web */
         [data-lang="en"] { display: none; }
 
         @media print {
@@ -27,211 +26,213 @@
                 background-color: #ffffff !important;
                 padding: 0 !important;
                 color: #111827 !important;
-                font-size: 10.5pt;
-                line-height: 1.45;
+                font-size: 10pt;
+                line-height: 1.4;
             }
 
             .main-card {
                 max-width: 100% !important;
                 box-shadow: none !important;
                 padding: 0 !important;
-                border-radius: 0 !important;
             }
 
-            .no-print { 
+            .no-print, .pdf-checkbox-container { 
                 display: none !important; 
             }
 
-            .hidden-extra { 
-                display: block !important; 
+            .pdf-hidden {
+                display: none !important;
             }
 
-            /* Prevenção de quebra de página inadequada */
-            section, 
-            header, 
-            .print-avoid-break, 
-            #exp-list > div, 
-            #projetos-list > div > a, 
-            #edu-list > div, 
-            #cert-list > div {
+            .section-break-before {
+                break-before: page !important;
+                page-break-before: always !important;
+            }
+
+            section, header, .item-card {
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
 
-            /* Ajustes estéticos para PDF/Impressão */
             header {
                 border-bottom: 2px solid #2563eb !important;
                 padding-bottom: 1rem !important;
                 margin-bottom: 1.25rem !important;
             }
 
-            h1 {
-                font-size: 24pt !important;
-                color: #0f172a !important;
-            }
-
-            h2 {
-                font-size: 13pt !important;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-                color: #1e40af !important;
-                border-bottom: 1px solid #e2e8f0 !important;
-                padding-bottom: 0.25rem !important;
-                margin-bottom: 0.75rem !important;
-            }
-
-            a {
-                text-decoration: none !important;
-                color: #1d4ed8 !important;
-            }
-
-            .badge-print {
-                background-color: #f1f5f9 !important;
-                border: 1px solid #cbd5e1 !important;
-                color: #334155 !important;
-                font-size: 8.5pt !important;
-                padding: 2px 8px !important;
+            h1 { font-size: 22pt !important; color: #0f172a !important; }
+            h2 { 
+                font-size: 12pt !important; 
+                text-transform: uppercase; 
+                color: #1e40af !important; 
+                border-bottom: 1px solid #cbd5e1 !important;
+                padding-bottom: 0.2rem !important;
+                margin-bottom: 0.6rem !important;
             }
 
             .card-print {
                 border: 1px solid #e2e8f0 !important;
                 background-color: #ffffff !important;
-                box-shadow: none !important;
             }
         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 p-2 md:p-8">
 
-    <div class="main-card max-w-4xl mx-auto bg-white p-8 md:p-10 shadow-lg rounded-xl">
+    <div class="main-card max-w-4xl mx-auto bg-white p-6 md:p-10 shadow-lg rounded-xl">
 
-        <!-- Botoes de Idioma -->
-        <div class="no-print flex justify-end gap-2 mb-4">
-            <button onclick="setLang('pt')" class="text-2xl hover:scale-110 transition cursor-pointer" title="Português">🇧🇷/🇵🇹</button>
-            <button onclick="setLang('en')" class="text-2xl hover:scale-110 transition cursor-pointer" title="English">🇬🇧/🇺🇸</button>
+        <!-- Painel Superior de Ações -->
+        <div class="no-print bg-slate-100 p-4 rounded-lg mb-6 flex flex-wrap justify-between items-center gap-4 border border-slate-200">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-sm text-slate-700">Idioma:</span>
+                <button onclick="setLang('pt')" class="px-2 py-1 bg-white border rounded text-xs font-semibold hover:bg-slate-50">🇧🇷 Português</button>
+                <button onclick="setLang('en')" class="px-2 py-1 bg-white border rounded text-xs font-semibold hover:bg-slate-50">🇺🇸 English</button>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="selectAllItems(true)" class="text-xs text-blue-600 hover:underline">Marcar Todos</button>
+                <span class="text-slate-300">|</span>
+                <button onclick="selectAllItems(false)" class="text-xs text-blue-600 hover:underline">Desmarcar Todos</button>
+                <button onclick="window.print()" class="bg-blue-600 text-white font-semibold text-sm px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow">
+                    📄 Gerar PDF Ajustado
+                </button>
+            </div>
         </div>
 
         <!-- Cabeçalho -->
-        <header class="border-b-2 border-blue-600 pb-6 mb-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Matheus Maia</h1>
-                    <p class="text-lg text-blue-600 font-bold mt-1">
-                        <span data-lang="pt">Financeiro | Arquiteto de Soluções Low-Code | Analista de Dados | Automação e Eficiência Operacional</span>
-                        <span data-lang="en">Finance | Low-Code Solutions Architect | Data Analyst | Process Automation & Operations</span>
-                    </p>
-                </div>
-            </div>
+        <header class="border-b-2 border-blue-600 pb-5 mb-6">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900">Matheus Maia</h1>
+            <p class="text-base md:text-lg text-blue-600 font-bold mt-1">
+                <span data-lang="pt">Financeiro | Arquiteto de Soluções Low-Code | Analista de Dados | Automação e Eficiência Operacional</span>
+                <span data-lang="en">Finance | Low-Code Solutions Architect | Data Analyst | Process Automation & Operations</span>
+            </p>
 
-            <div class="mt-4 text-xs md:text-sm text-gray-600 flex flex-wrap gap-x-6 gap-y-2 font-medium">
-                <span class="flex items-center gap-1">📍 Fortaleza, Ceará</span>
-                <span class="flex items-center gap-1">📧 matheusmaia03@gmail.com</span>
-                <span class="flex items-center gap-1">🔗 <a href="https://www.linkedin.com/in/32-matheusmaia" target="_blank" class="text-blue-700 underline hover:text-blue-900">linkedin.com/in/32-matheusmaia</a></span>
-                <span class="flex items-center gap-1">💻 <a href="https://github.com/Pivetzen" target="_blank" class="text-blue-700 underline hover:text-blue-900">github.com/Pivetzen</a></span>
+            <div class="mt-3 text-xs md:text-sm text-gray-600 flex flex-wrap gap-x-5 gap-y-1 font-medium">
+                <span>📍 Fortaleza, Ceará</span>
+                <span>📧 matheusmaia03@gmail.com</span>
+                <span>🔗 <a href="https://www.linkedin.com/in/32-matheusmaia" target="_blank" class="text-blue-700 underline">linkedin.com/in/32-matheusmaia</a></span>
+                <span>💻 <a href="https://github.com/Pivetzen" target="_blank" class="text-blue-700 underline">github.com/Pivetzen</a></span>
             </div>
-
-            <button onclick="window.print()" class="no-print mt-6 bg-blue-600 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-blue-700 transition shadow cursor-pointer">
-                <span data-lang="pt">📄 Baixar Currículo (PDF)</span>
-                <span data-lang="en">📄 Download Resume (PDF)</span>
-            </button>
         </header>
 
         <!-- Resumo -->
-        <section class="mb-6 print-avoid-break">
-            <h2 class="text-xl font-bold mb-2 text-slate-800">
-                <span data-lang="pt">Resumo Profissional</span>
-                <span data-lang="en">Summary</span>
-            </h2>
-            <p class="text-gray-700 text-sm leading-relaxed text-justify">
+        <section id="sec-resumo" class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-slate-800">
+                    <span data-lang="pt">Resumo Profissional</span>
+                    <span data-lang="en">Summary</span>
+                </h2>
+                <label class="no-print flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                    <input type="checkbox" onchange="toggleSectionBreak('sec-resumo', this)">
+                    <span>Quebrar página antes</span>
+                </label>
+            </div>
+            <p class="text-gray-700 text-xs md:text-sm leading-relaxed text-justify">
                 <span data-lang="pt">Minha carreira é dedicada a transformar informações em ações estratégicas. Com mais de 6 anos de experiência em gestão de projetos e processos, meu diferencial é utilizar a análise de dados como a espinha dorsal da tomada de decisão. Lidero com base em evidências, otimizando fluxos de trabalho da gestão financeira e licitatória na administração pública ao desenvolvimento de aplicações low-code (Google Sheets, JavaScript, Firebase). Desenvolvo automações financeiras e aplicações interativas com visão focada na agilidade técnica e inteligência de negócios.</span>
                 <span data-lang="en">My career is dedicated to transforming information into strategic actions. Over 6 years of experience in project and process management, using data analysis as the backbone for decision-making. I lead based on evidence, optimizing workflows from public administration finance and procurement to developing low-code applications (Google Sheets, JavaScript, Firebase), bridging business management with technical execution.</span>
             </p>
         </section>
 
-        <!-- Idiomas (Dinâmico) -->
-        <section class="mb-6 print-avoid-break">
-            <h2 class="text-xl font-bold mb-2 text-slate-800">
-                <span data-lang="pt">Idiomas</span>
-                <span data-lang="en">Languages</span>
-            </h2>
-            <div id="idiomas-list" class="flex flex-wrap gap-3">
+        <!-- Idiomas -->
+        <section id="sec-idiomas" class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-slate-800">
+                    <span data-lang="pt">Idiomas</span>
+                    <span data-lang="en">Languages</span>
+                </h2>
+                <label class="no-print flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                    <input type="checkbox" onchange="toggleSectionBreak('sec-idiomas', this)">
+                    <span>Quebrar página antes</span>
+                </label>
+            </div>
+            <div id="idiomas-list" class="flex flex-wrap gap-2">
                 <p class="text-sm text-gray-500 italic">Carregando idiomas...</p>
             </div>
         </section>
 
-        <!-- Experiência Profissional (Dinâmico) -->
-        <section class="mb-6">
-            <h2 class="text-xl font-bold mb-3 text-slate-800">
-                <span data-lang="pt">Experiência Profissional</span>
-                <span data-lang="en">Professional Experience</span>
-            </h2>
+        <!-- Experiência Profissional -->
+        <section id="sec-exp" class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-slate-800">
+                    <span data-lang="pt">Experiência Profissional</span>
+                    <span data-lang="en">Professional Experience</span>
+                </h2>
+                <label class="no-print flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                    <input type="checkbox" onchange="toggleSectionBreak('sec-exp', this)">
+                    <span>Quebrar página antes</span>
+                </label>
+            </div>
             <div id="exp-list">
                 <p class="text-sm text-gray-500 italic">Carregando experiências...</p>
             </div>
-            <button id="btn-exp" onclick="toggleSection('exp-list', this)" class="no-print mt-2 text-blue-600 font-semibold text-sm hover:underline hidden cursor-pointer">
-                <span data-lang="pt">Ver mais experiências</span>
-                <span data-lang="en">See more experience</span>
-            </button>
         </section>
 
-        <!-- Projetos de Destaque (Dinâmico) -->
-        <section class="mb-6">
-            <h2 class="text-xl font-bold mb-3 text-slate-800">
-                <span data-lang="pt">Projetos de Destaque</span>
-                <span data-lang="en">Featured Projects</span>
-            </h2>
+        <!-- Projetos de Destaque -->
+        <section id="sec-projetos" class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-slate-800">
+                    <span data-lang="pt">Projetos de Destaque</span>
+                    <span data-lang="en">Featured Projects</span>
+                </h2>
+                <label class="no-print flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                    <input type="checkbox" onchange="toggleSectionBreak('sec-projetos', this)">
+                    <span>Quebrar página antes</span>
+                </label>
+            </div>
             <div id="projetos-list">
                 <p class="text-sm text-gray-500 italic">Carregando projetos...</p>
             </div>
-            <button id="btn-projetos" onclick="toggleSection('projetos-list', this)" class="no-print mt-2 text-blue-600 font-semibold text-sm hover:underline hidden cursor-pointer">
-                <span data-lang="pt">Ver mais projetos</span>
-                <span data-lang="en">See more projects</span>
-            </button>
         </section>
 
-        <!-- Formação Acadêmica (Dinâmico) -->
-        <section class="mb-6 print-avoid-break">
-            <h2 class="text-xl font-bold mb-3 text-slate-800">
-                <span data-lang="pt">Formação Acadêmica</span>
-                <span data-lang="en">Education</span>
-            </h2>
+        <!-- Formação Acadêmica -->
+        <section id="sec-edu" class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-slate-800">
+                    <span data-lang="pt">Formação Acadêmica</span>
+                    <span data-lang="en">Education</span>
+                </h2>
+                <label class="no-print flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                    <input type="checkbox" onchange="toggleSectionBreak('sec-edu', this)">
+                    <span>Quebrar página antes</span>
+                </label>
+            </div>
             <div id="edu-list">
                 <p class="text-sm text-gray-500 italic">Carregando formação...</p>
             </div>
-            <button id="btn-edu" onclick="toggleSection('edu-list', this)" class="no-print mt-2 text-blue-600 font-semibold text-sm hover:underline hidden cursor-pointer">
-                <span data-lang="pt">Ver mais formações</span>
-                <span data-lang="en">See more education</span>
-            </button>
         </section>
 
-        <!-- Certificados e Cursos (Dinâmico) -->
-        <section class="mb-6 print-avoid-break">
-            <h2 class="text-xl font-bold mb-3 text-slate-800">
-                <span data-lang="pt">Certificados e Cursos</span>
-                <span data-lang="en">Certifications & Courses</span>
-            </h2>
+        <!-- Certificados e Cursos -->
+        <section id="sec-cert" class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-slate-800">
+                    <span data-lang="pt">Certificados e Cursos</span>
+                    <span data-lang="en">Certifications & Courses</span>
+                </h2>
+                <label class="no-print flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                    <input type="checkbox" onchange="toggleSectionBreak('sec-cert', this)">
+                    <span>Quebrar página antes</span>
+                </label>
+            </div>
             <div id="cert-list">
                 <p class="text-sm text-gray-500 italic">Carregando certificados...</p>
             </div>
-            <button id="btn-cert" onclick="toggleSection('cert-list', this)" class="no-print mt-2 text-blue-600 font-semibold text-sm hover:underline hidden cursor-pointer">
-                <span data-lang="pt">Ver mais certificados</span>
-                <span data-lang="en">See more certificates</span>
-            </button>
         </section>
 
-        <!-- Competências Técnicas (Dinâmico) -->
-        <section class="print-avoid-break">
-            <h2 class="text-xl font-bold mb-3 text-slate-800">
-                <span data-lang="pt">Competências Técnicas</span>
-                <span data-lang="en">Technical Skills</span>
-            </h2>
-            <div id="habilidades-list" class="flex flex-wrap gap-1.5 md:gap-2">
+        <!-- Competências Técnicas -->
+        <section id="sec-habilidades">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-slate-800">
+                    <span data-lang="pt">Competências Técnicas</span>
+                    <span data-lang="en">Technical Skills</span>
+                </h2>
+                <label class="no-print flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                    <input type="checkbox" onchange="toggleSectionBreak('sec-habilidades', this)">
+                    <span>Quebrar página antes</span>
+                </label>
+            </div>
+            <div id="habilidades-list" class="flex flex-wrap gap-1.5">
                 <p class="text-sm text-gray-500 italic">Carregando competências...</p>
             </div>
-            <button id="btn-habilidades" onclick="toggleSection('habilidades-list', this)" class="no-print mt-2 text-blue-600 font-semibold text-sm hover:underline hidden cursor-pointer">
-                <span data-lang="pt">Ver mais competências</span>
-                <span data-lang="en">See more skills</span>
-            </button>
         </section>
     </div>
 
@@ -256,26 +257,25 @@
             });
         }
 
-        function toggleSection(id, btn) {
-            const container = document.getElementById(id);
-            const hiddenElements = container.querySelectorAll('.hidden-extra');
-            if (!hiddenElements.length) return;
-
-            hiddenElements.forEach(el => el.classList.toggle('hidden'));
-            const isExpanded = !hiddenElements[0].classList.contains('hidden');
-
-            const textMap = {
-                'projetos-list':    { pt: isExpanded ? 'Ver menos' : 'Ver mais projetos', en: isExpanded ? 'See less' : 'See more projects' },
-                'exp-list':         { pt: isExpanded ? 'Ver menos' : 'Ver mais experiências', en: isExpanded ? 'See less' : 'See more experience' },
-                'edu-list':         { pt: isExpanded ? 'Ver menos' : 'Ver mais formações', en: isExpanded ? 'See less' : 'See more education' },
-                'cert-list':        { pt: isExpanded ? 'Ver menos' : 'Ver mais certificados', en: isExpanded ? 'See less' : 'See more certificates' },
-                'habilidades-list': { pt: isExpanded ? 'Ver menos' : 'Ver mais competências', en: isExpanded ? 'See less' : 'See more skills' }
-            };
-
-            if (textMap[id]) {
-                btn.innerHTML = `<span data-lang="pt">${textMap[id].pt}</span><span data-lang="en">${textMap[id].en}</span>`;
-                setLang(currentLang);
+        function toggleItemPdf(checkbox) {
+            const item = checkbox.closest('.item-card');
+            if (item) {
+                item.classList.toggle('pdf-hidden', !checkbox.checked);
             }
+        }
+
+        function toggleSectionBreak(sectionId, checkbox) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.toggle('section-break-before', checkbox.checked);
+            }
+        }
+
+        function selectAllItems(state) {
+            document.querySelectorAll('.item-checkbox').forEach(cb => {
+                cb.checked = state;
+                toggleItemPdf(cb);
+            });
         }
 
         async function fetchSheetData(url) {
@@ -303,15 +303,18 @@
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
             container.innerHTML = data.map(item => `
-                <div class="card-print bg-slate-50 border border-slate-200 px-3 py-1.5 rounded text-xs">
-                    <span class="font-bold text-slate-800">
-                        <span data-lang="pt">${item.idioma_pt}:</span>
-                        <span data-lang="en">${item.idioma_en}:</span>
-                    </span> 
-                    <span class="text-slate-600">
-                        <span data-lang="pt">${item.nivel_pt}</span>
-                        <span data-lang="en">${item.nivel_en}</span>
-                    </span>
+                <div class="item-card card-print bg-slate-50 border border-slate-200 px-3 py-1.5 rounded text-xs flex items-center gap-2">
+                    <input type="checkbox" checked class="item-checkbox no-print accent-blue-600" onchange="toggleItemPdf(this)">
+                    <div>
+                        <span class="font-bold text-slate-800">
+                            <span data-lang="pt">${item.idioma_pt}:</span>
+                            <span data-lang="en">${item.idioma_en}:</span>
+                        </span> 
+                        <span class="text-slate-600">
+                            <span data-lang="pt">${item.nivel_pt}</span>
+                            <span data-lang="en">${item.nivel_en}</span>
+                        </span>
+                    </div>
                 </div>
             `).join('');
             setLang(currentLang);
@@ -320,211 +323,129 @@
         async function loadProjetos() {
             const data = await fetchSheetData(URLS_SHEETS.projetos);
             const container = document.getElementById('projetos-list');
-            const btn = document.getElementById('btn-projetos');
             if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhum projeto cadastrado.</p>'; return; }
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            let mainHTML = '';
-            let extraHTML = '';
-
-            data.forEach(item => {
-                const card = `
-                    <a href="${item.link || '#'}" target="_blank" class="card-print border border-slate-200 rounded-lg p-3.5 hover:border-blue-500 hover:bg-blue-50/50 transition block">
-                        <h3 class="font-bold text-sm text-blue-700">${item.titulo}</h3>
+            container.innerHTML = `<div class="grid md:grid-cols-2 gap-3">` + data.map(item => `
+                <div class="item-card card-print border border-slate-200 rounded-lg p-3 relative">
+                    <div class="no-print absolute top-2 right-2">
+                        <input type="checkbox" checked class="item-checkbox accent-blue-600" onchange="toggleItemPdf(this)">
+                    </div>
+                    <a href="${item.link || '#'}" target="_blank" class="block">
+                        <h3 class="font-bold text-sm text-blue-700 pr-5">${item.titulo}</h3>
                         <p class="text-xs text-gray-600 mt-1 leading-relaxed">
                             <span data-lang="pt">${item.descricao_pt}</span>
                             <span data-lang="en">${item.descricao_en}</span>
                         </p>
                     </a>
-                `;
-                if ((item.destaque || '').toUpperCase() === 'SIM') {
-                    mainHTML += card;
-                } else {
-                    extraHTML += card;
-                }
-            });
-
-            let finalHTML = `<div class="grid md:grid-cols-2 gap-3">${mainHTML}`;
-            if (extraHTML) {
-                finalHTML += `<div class="hidden-extra hidden contents">${extraHTML}</div>`;
-                btn.classList.remove('hidden');
-            }
-            finalHTML += `</div>`;
-
-            container.innerHTML = finalHTML;
+                </div>
+            `).join('') + `</div>`;
             setLang(currentLang);
         }
 
         async function loadExperiencias() {
             const data = await fetchSheetData(URLS_SHEETS.experiencias);
             const container = document.getElementById('exp-list');
-            const btn = document.getElementById('btn-exp');
             if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhuma experiência cadastrada.</p>'; return; }
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            let mainHTML = '';
-            let extraHTML = '';
-
-            data.forEach(item => {
-                const card = `
-                    <div class="card-print border-l-2 border-l-blue-600 border border-slate-200 rounded-r-lg p-3.5 mb-3">
-                        <div class="flex justify-between items-baseline flex-wrap gap-1">
-                            <h3 class="font-bold text-sm text-slate-900">
-                                <span data-lang="pt">${item.cargo_pt}</span>
-                                <span data-lang="en">${item.cargo_en}</span>
-                                <span class="text-blue-700 font-semibold">| ${item.empresa}</span>
-                            </h3>
-                            <span class="text-xs text-slate-500 font-medium">
-                                (<span data-lang="pt">${item.periodo_pt}</span><span data-lang="en">${item.periodo_en}</span>)
-                            </span>
-                        </div>
-                        <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
-                            <span data-lang="pt">${item.descricao_pt}</span>
-                            <span data-lang="en">${item.descricao_en}</span>
-                        </p>
+            container.innerHTML = `<div class="space-y-3">` + data.map(item => `
+                <div class="item-card card-print border-l-2 border-l-blue-600 border border-slate-200 rounded-r-lg p-3.5 relative">
+                    <div class="no-print absolute top-3 right-3">
+                        <input type="checkbox" checked class="item-checkbox accent-blue-600" onchange="toggleItemPdf(this)">
                     </div>
-                `;
-                if ((item.destaque || '').toUpperCase() === 'SIM') {
-                    mainHTML += card;
-                } else {
-                    extraHTML += card;
-                }
-            });
-
-            let finalHTML = `<div class="space-y-3">${mainHTML}`;
-            if (extraHTML) {
-                finalHTML += `<div class="hidden-extra hidden space-y-3">${extraHTML}</div>`;
-                btn.classList.remove('hidden');
-            }
-            finalHTML += `</div>`;
-
-            container.innerHTML = finalHTML;
+                    <div class="flex justify-between items-baseline flex-wrap gap-1 pr-6">
+                        <h3 class="font-bold text-sm text-slate-900">
+                            <span data-lang="pt">${item.cargo_pt}</span>
+                            <span data-lang="en">${item.cargo_en}</span>
+                            <span class="text-blue-700 font-semibold">| ${item.empresa}</span>
+                        </h3>
+                        <span class="text-xs text-slate-500 font-medium">
+                            (<span data-lang="pt">${item.periodo_pt}</span><span data-lang="en">${item.periodo_en}</span>)
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                        <span data-lang="pt">${item.descricao_pt}</span>
+                        <span data-lang="en">${item.descricao_en}</span>
+                    </p>
+                </div>
+            `).join('') + `</div>`;
             setLang(currentLang);
         }
 
         async function loadFormacao() {
             const data = await fetchSheetData(URLS_SHEETS.formacao);
             const container = document.getElementById('edu-list');
-            const btn = document.getElementById('btn-edu');
             if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhuma formação cadastrada.</p>'; return; }
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            let mainHTML = '';
-            let extraHTML = '';
-
-            data.forEach(item => {
-                const card = `
-                    <div class="card-print border border-slate-200 rounded-lg p-3 mb-2.5">
-                        <h3 class="font-bold text-sm text-slate-900">
-                            <span data-lang="pt">${item.curso_pt}</span>
-                            <span data-lang="en">${item.curso_en}</span>
-                        </h3>
-                        <p class="text-xs text-slate-600 mt-0.5">
-                            <span>${item.instituicao}</span> • 
-                            <span class="italic text-blue-700 font-medium">
-                                <span data-lang="pt">${item.status_pt}</span>
-                                <span data-lang="en">${item.status_en}</span>
-                            </span>
-                        </p>
+            container.innerHTML = `<div class="space-y-2.5">` + data.map(item => `
+                <div class="item-card card-print border border-slate-200 rounded-lg p-3 relative">
+                    <div class="no-print absolute top-2.5 right-2.5">
+                        <input type="checkbox" checked class="item-checkbox accent-blue-600" onchange="toggleItemPdf(this)">
                     </div>
-                `;
-                if ((item.destaque || '').toUpperCase() === 'SIM') {
-                    mainHTML += card;
-                } else {
-                    extraHTML += card;
-                }
-            });
-
-            let finalHTML = `<div class="space-y-2.5">${mainHTML}`;
-            if (extraHTML) {
-                finalHTML += `<div class="hidden-extra hidden space-y-2.5">${extraHTML}</div>`;
-                btn.classList.remove('hidden');
-            }
-            finalHTML += `</div>`;
-
-            container.innerHTML = finalHTML;
+                    <h3 class="font-bold text-sm text-slate-900 pr-6">
+                        <span data-lang="pt">${item.curso_pt}</span>
+                        <span data-lang="en">${item.curso_en}</span>
+                    </h3>
+                    <p class="text-xs text-slate-600 mt-0.5">
+                        <span>${item.instituicao}</span> • 
+                        <span class="italic text-blue-700 font-medium">
+                            <span data-lang="pt">${item.status_pt}</span>
+                            <span data-lang="en">${item.status_en}</span>
+                        </span>
+                    </p>
+                </div>
+            `).join('') + `</div>`;
             setLang(currentLang);
         }
 
         async function loadCertificados() {
             const data = await fetchSheetData(URLS_SHEETS.certificados);
             const container = document.getElementById('cert-list');
-            const btn = document.getElementById('btn-cert');
             if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhum certificado cadastrado.</p>'; return; }
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            let mainHTML = '';
-            let extraHTML = '';
-
-            data.forEach(item => {
-                const card = `
-                    <div class="card-print border border-slate-200 rounded-lg p-2.5 mb-2">
-                        <h3 class="font-bold text-xs text-slate-800">
-                            <span data-lang="pt">${item.titulo_pt}</span>
-                            <span data-lang="en">${item.titulo_en}</span>
-                        </h3>
-                        <p class="text-[11px] text-slate-500 mt-0.5">${item.emissor} • ${item.ano}</p>
+            container.innerHTML = `<div class="grid md:grid-cols-2 gap-2">` + data.map(item => `
+                <div class="item-card card-print border border-slate-200 rounded-lg p-2.5 relative">
+                    <div class="no-print absolute top-2 right-2">
+                        <input type="checkbox" checked class="item-checkbox accent-blue-600" onchange="toggleItemPdf(this)">
                     </div>
-                `;
-
-                if ((item.destaque || '').toUpperCase() === 'SIM') {
-                    mainHTML += card;
-                } else {
-                    extraHTML += card;
-                }
-            });
-
-            let finalHTML = `<div class="grid md:grid-cols-2 gap-2">${mainHTML}`;
-            if (extraHTML) {
-                finalHTML += `<div class="hidden-extra hidden contents">${extraHTML}</div>`;
-                btn.classList.remove('hidden');
-            }
-            finalHTML += `</div>`;
-
-            container.innerHTML = finalHTML;
+                    <h3 class="font-bold text-xs text-slate-800 pr-5">
+                        <span data-lang="pt">${item.titulo_pt}</span>
+                        <span data-lang="en">${item.titulo_en}</span>
+                    </h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5">${item.emissor} • ${item.ano}</p>
+                </div>
+            `).join('') + `</div>`;
             setLang(currentLang);
         }
 
         async function loadHabilidades() {
             const data = await fetchSheetData(URLS_SHEETS.habilidades);
             const container = document.getElementById('habilidades-list');
-            const btn = document.getElementById('btn-habilidades');
             if (!data.length) { container.innerHTML = '<p class="text-sm text-gray-500">Nenhuma habilidade cadastrada.</p>'; return; }
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            let mainHTML = '';
-            let extraHTML = '';
-
-            data.forEach(item => {
+            container.innerHTML = data.map(item => {
                 const nomePt = item.nome_pt || item.nome || '';
                 const nomeEn = item.nome_en || item.nome || nomePt;
 
-                const badge = `
-                    <span class="badge-print bg-slate-100 text-slate-700 font-medium px-2.5 py-1 rounded text-xs border border-slate-200">
-                        <span data-lang="pt">${nomePt}</span>
-                        <span data-lang="en">${nomeEn}</span>
-                    </span>
+                return `
+                    <div class="item-card card-print bg-slate-100 text-slate-700 font-medium px-2.5 py-1 rounded text-xs border border-slate-200 flex items-center gap-1.5">
+                        <input type="checkbox" checked class="item-checkbox no-print accent-blue-600" onchange="toggleItemPdf(this)">
+                        <span>
+                            <span data-lang="pt">${nomePt}</span>
+                            <span data-lang="en">${nomeEn}</span>
+                        </span>
+                    </div>
                 `;
-
-                if ((item.destaque || '').toUpperCase() === 'SIM') {
-                    mainHTML += badge;
-                } else {
-                    extraHTML += badge;
-                }
-            });
-
-            let finalHTML = mainHTML;
-            if (extraHTML) {
-                finalHTML += `<div class="hidden-extra hidden flex flex-wrap gap-1.5 md:gap-2 mt-2">${extraHTML}</div>`;
-                btn.classList.remove('hidden');
-            }
-
-            container.innerHTML = finalHTML;
+            }).join('');
             setLang(currentLang);
         }
 

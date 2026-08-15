@@ -16,6 +16,7 @@
 
         [data-lang="en"] { display: none; }
 
+        /* Estilos específicos para Impressão / PDF */
         @media print {
             * {
                 -webkit-print-color-adjust: exact !important;
@@ -44,6 +45,7 @@
                 display: none !important;
             }
 
+            /* Forçar quebra de página por seção */
             .section-break-before {
                 break-before: page !important;
                 page-break-before: always !important;
@@ -52,6 +54,13 @@
             section, header, .item-card {
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
+            }
+
+            /* Forçar grid de 2 colunas no PDF para Certificados e Projetos */
+            .print-grid-2 {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 0.5rem !important;
             }
 
             header {
@@ -327,7 +336,7 @@
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            container.innerHTML = `<div class="grid md:grid-cols-2 gap-3">` + data.map(item => `
+            container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 print-grid-2 gap-3">` + data.map(item => `
                 <div class="item-card card-print border border-slate-200 rounded-lg p-3 relative">
                     <div class="no-print absolute top-2 right-2">
                         <input type="checkbox" checked class="item-checkbox accent-blue-600" onchange="toggleItemPdf(this)">
@@ -410,7 +419,8 @@
 
             data.sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
 
-            container.innerHTML = `<div class="grid md:grid-cols-2 gap-2">` + data.map(item => `
+            /* Aplica explicitamente a classe print-grid-2 para manter 2 colunas no PDF */
+            container.innerHTML = `<div class="grid grid-cols-2 print-grid-2 gap-2">` + data.map(item => `
                 <div class="item-card card-print border border-slate-200 rounded-lg p-2.5 relative">
                     <div class="no-print absolute top-2 right-2">
                         <input type="checkbox" checked class="item-checkbox accent-blue-600" onchange="toggleItemPdf(this)">
